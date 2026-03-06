@@ -14,10 +14,10 @@ return rows[0]
 }
 export const createNovedad = async({idNovedad,tituloNovedad,encabezado,informacion,nombreImagen,Imagen})=>{ 
 const[restult] = await db.query(
-    'INSERT INTO novedades(idNovedad,tituloNovedad,encabezado,informacion,nombreImagen,Imagen)',[idNovedad,tituloNovedad,encabezado,informacion,nombreImagen,Imagen]
+    'INSERT INTO novedades(idNovedad,tituloNovedad,encabezado,informacion,nombreImagen,Imagen) VALUES (?,?,?,?,?,?)',[idNovedad,tituloNovedad,encabezado,informacion,nombreImagen,Imagen]
 )
 return{
-    idNovedad,
+    idNovedad: restult.insertId,
     tituloNovedad,
     encabezado,
     informacion,

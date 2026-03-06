@@ -10,12 +10,15 @@ export const getDispositivosById = async(id)=>{
     [id]
     )
 }
-export const createDispositivo= async({idDispositivo,idLaboratorio,idModelo,idTipoDispositivo,nombreDispositivo,numeroInventario})=>{
-const [restult]= await db.query('insert into grupos(idDispositivo,idLaboratorio,idModelo,idTipoDispositivo,nombreDispositivo,numeroInventario) values(?,?,?,?,?,?)'
-,[idDispositivo,idLaboratorio,idModelo,idTipoDispositivo,nombreDispositivo,numeroInventario])
-return
-{
-    idDispositivo,
+export const createDispositivo = async ({ idLaboratorio,idModelo,idTipoDispositivo,nombreDispositivo,numeroInventario}) => {
+
+const [result] = await db.query(
+'INSERT INTO dispositivos(idLaboratorio,idModelo,idTipoDispositivo,nombreDispositivo,numeroInventario) VALUES (?,?,?,?,?)',
+[idLaboratorio,idModelo,idTipoDispositivo,nombreDispositivo,numeroInventario]
+)
+
+return {
+    idDispositivo: result.insertId,
     idLaboratorio,
     idModelo,
     idTipoDispositivo,
@@ -28,15 +31,3 @@ return
 
 
 
-/*
-
-export const createModelo = async({idMarca,nombreModelo})=>{
-    const [restult]=await db.query(
-        'insert into grupos(idMarca,nombreModelo) values (?,?)'
-        ,[idMarca,nombreModelo])
-    return {
-        idModelo: result.insertId,
-       idMarca,
-       nombreModelo
-    }
-}*/

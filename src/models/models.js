@@ -15,10 +15,10 @@ export const getModeloById = async (id) => { const [rows] = await db.query(
 
 export const createModelo = async({idMarca,nombreModelo})=>{
     const [restult]=await db.query(
-        'insert into grupos(idMarca,nombreModelo) values (?,?)'
+        'INSERT INTO grupos(idMarca,nombreModelo) VALUES (?,?)'
         ,[idMarca,nombreModelo])
     return {
-        idModelo: result.insertId,
+        idModelo: restult.insertId,
        idMarca,
        nombreModelo
     }

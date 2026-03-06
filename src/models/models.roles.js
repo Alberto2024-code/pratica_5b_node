@@ -15,11 +15,10 @@ export const getRolById = async (id) => {
   return rows[0]
 }
 
-// Crear nuevo rol
-export const createRol = async ({ rol }) => {
+export const createRol = async ({  idRol,rol }) => {
   const [result] = await db.query(
-    'INSERT INTO roles (rol) VALUES (?)',
-    [rol]
+    'INSERT INTO roles ( idRol,rol) VALUES (?,?)',
+    [idRol,rol]
   )
 
   return {

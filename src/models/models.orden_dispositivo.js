@@ -18,7 +18,7 @@ export const createOrdenDispositivo = async({idOrden,idDispositivo,idTipoManteni
         'INSERT INTO orden_dispositivo(idOrden,idDispositivo,idTipoMantenimiento,realizado) values (?,?,?,?)'
         ,[idOrden,idDispositivo,idTipoMantenimiento,realizado])
     return {
-        idOrden,
+        idOrden:restult.insertId,
         idDispositivo,
         idTipoMantenimiento,
         realizado
