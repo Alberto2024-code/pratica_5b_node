@@ -2,13 +2,16 @@ import db from '../config/BD.js'
 
 
 export const getAllDispositivos = async()=>{
-    const [rows]= await db.query('select * from dispositivos')
+    const [rows]= await db.query('SELECT * FROM dispositivos'
+    
+  )
     return rows
 }
 export const getDispositivosById = async(id)=>{
     const [rows]= await db.query('SELECT * FROM dispositivos WHERE idDispositivos=?',
     [id]
     )
+    return rows[0]
 }
 export const createDispositivo = async ({ idLaboratorio,idModelo,idTipoDispositivo,nombreDispositivo,numeroInventario}) => {
 

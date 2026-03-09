@@ -52,3 +52,34 @@ export const createOrden = async (req, res) => {
     res.status(500).json({ error: error.message })
   }
 }
+export const updateOrden = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const datos = req.body;
+
+        const result = await ordenModel.updateOrdenModel(id, datos);
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ message: 'Orden no encontrada' });
+        }
+
+        res.json({ message: 'Orden actualizada exitosamente' });
+    } catch (error) {
+        res.status(500).json({ error: 'Error al actualizar la orden: ' + error.message });
+    }
+};
+
+export const deleteOrden = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const result = await ordenModel.deleteOrdenModel(id);
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ message: 'Orden no encontrada' });
+        }
+
+        res.json({ message: 'Orden eliminada correctamente' });
+    } catch (error) {
+        res.status(500).json({ error: 'Error al eliminar la orden: ' + error.message });
+    }
+};

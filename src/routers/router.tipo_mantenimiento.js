@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import * as ctrl from '../controllers/controller.tipo_mantenimiendo.js'
+import { verificarToken } from '../middlewares/middlewares.auth.js'
 
 const router = Router()
 
@@ -10,6 +11,7 @@ router.get('/', ctrl.getAllTipoMantenimiento)
 router.get('/:id', ctrl.getTipoMantenimientoById)
 
 // POST /api/laboratorios
-router.post('/', ctrl.createTipoMantenimiento)
+router.post('/',verificarToken, ctrl.createTipoMantenimiento)
+
 
 export default router

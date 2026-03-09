@@ -39,3 +39,27 @@ export const createOrden = async ({ idUsuario,idLaboratorio,estado,insumos,horas
     horasHombre
   }
 }
+// Actualizar Orden
+export const updateOrdenModel = async (id, datos) => {
+    const { idUsuario, idLaboratorio, estado, insumos, horasHombre } = datos;
+    const [result] = await db.query(
+        `UPDATE ordenes SET 
+         idUsuario = ?, 
+         idLaboratorio = ?, 
+         estado = ?, 
+         insumos = ?, 
+         horasHombre = ? 
+         WHERE idOrden = ?`,
+        [idUsuario, idLaboratorio, estado, insumos, horasHombre, id]
+    );
+    return result;
+};
+
+// Eliminar Orden
+export const deleteOrdenModel = async (id) => {
+    const [result] = await db.query(
+        'DELETE FROM ordenes WHERE idOrden = ?',
+        [id]
+    );
+    return result;
+};

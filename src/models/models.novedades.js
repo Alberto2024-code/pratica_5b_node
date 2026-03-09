@@ -25,3 +25,21 @@ return{
     Imagen
 }
 }
+// Actualizar Novedad
+export const updateNovedadModel = async (id, datos) => {
+    const { tituloNovedad, encabezado, informacion, nombreImagen, Imagen } = datos;
+    const [result] = await db.query(
+        'UPDATE novedades SET tituloNovedad=?, encabezado=?, informacion=?, nombreImagen=?, Imagen=? WHERE idNovedad=?',
+        [tituloNovedad, encabezado, informacion, nombreImagen, Imagen, id]
+    );
+    return result;
+};
+
+// Eliminar Novedad
+export const deleteNovedadModel = async (id) => {
+    const [result] = await db.query(
+        'DELETE FROM novedades WHERE idNovedad = ?',
+        [id]
+    );
+    return result;
+};

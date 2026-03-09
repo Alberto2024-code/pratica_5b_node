@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import * as ctrl from '../controllers/controller.js'
+import { verificarToken } from '../middlewares/middlewares.auth.js'
 
 const router = Router()
 
@@ -10,6 +11,9 @@ router.get('/', ctrl.getAllModelos)
 router.get('/:id', ctrl.getModeloById)
 
 // POST /api/modelos
-router.post('/', ctrl.createModelo)
+router.post('/', verificarToken, ctrl.createModelo)
+
+router.put('/:id', verificarToken, ctrl.updateUsuarioModel);
+router.delete('/:id', verificarToken, ctrl.deleteUsuarioModel);
 
 export default router

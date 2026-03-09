@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import * as ctrl from '../controllers/controller.novedades.js'
+import { verificarToken } from '../middlewares/middlewares.auth.js'
 
 const router = Router()
 
@@ -10,6 +11,8 @@ router.get('/', ctrl.getAllNovedades)
 router.get('/:id', ctrl.getNovedadesById)
 
 // POST /api/
-router.post('/', ctrl.createNovedad)
+router.post('/',verificarToken, ctrl.createNovedad)
+router.put('/:id', verificarToken, ctrl.updateNovedad);
+router.delete('/:id', verificarToken, ctrl.deleteNovedad);
 
 export default router

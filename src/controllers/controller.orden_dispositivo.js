@@ -51,3 +51,34 @@ export const createOrdenDispositivo = async (req, res) => {
     res.status(500).json({ error: error.message })
   }
 }
+export const updateOrdenDispositivo = async (req, res) => {
+    try {
+        const { id } = req.params; // Este sería el idDispositivo según tu modelo
+        const datos = req.body;
+
+        const result = await ordenDispModel.updateOrdenDispositivoModel(id, datos);
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ message: 'Registro de orden-dispositivo no encontrado' });
+        }
+
+        res.json({ message: 'Orden de dispositivo actualizada correctamente' });
+    } catch (error) {
+        res.status(500).json({ error: 'Error al actualizar: ' + error.message });
+    }
+};
+
+export const deleteOrdenDispositivo = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const result = await ordenDispModel.deleteOrdenDispositivoModel(id);
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ message: 'Registro no encontrado' });
+        }
+
+        res.json({ message: 'Registro eliminado exitosamente' });
+    } catch (error) {
+        res.status(500).json({ error: 'Error al eliminar: ' + error.message });
+    }
+};

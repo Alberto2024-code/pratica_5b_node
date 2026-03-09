@@ -24,3 +24,21 @@ export const createOrdenDispositivo = async({idOrden,idDispositivo,idTipoManteni
         realizado
     }
 }
+// Actualizar relación Orden-Dispositivo
+export const updateOrdenDispositivoModel = async (id, datos) => {
+    const { idOrden, idTipoMantenimiento, realizado } = datos;
+    const [result] = await db.query(
+        'UPDATE orden_dispositivos SET idOrden = ?, idTipoMantenimiento = ?, realizado = ? WHERE idDispositivo = ?',
+        [idOrden, idTipoMantenimiento, realizado, id]
+    );
+    return result;
+};
+
+// Eliminar relación
+export const deleteOrdenDispositivoModel = async (id) => {
+    const [result] = await db.query(
+        'DELETE FROM orden_dispositivos WHERE idDispositivo = ?',
+        [id]
+    );
+    return result;
+};

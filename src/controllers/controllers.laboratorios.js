@@ -44,3 +44,38 @@ export const createLaboratorio = async (req, res) => {
     res.status(500).json({ error: error.message })
   }
 }
+export const updateLaboratorio = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { nombreLaboratorio } = req.body;
+
+        if (!nombreLaboratorio) {
+            return res.status(400).json({ message: 'El nombre del laboratorio es requerido' });
+        }
+
+        const result = await labModel.updateLaboratorioModel(id, { nombreLaboratorio });
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ message: 'Laboratorio no encontrado' });
+        }
+
+        res.json({ message: 'Laboratorio actualizado correctamente' });
+    } catch (error) {
+        res.status(500).json({ error: 'Error al actualizar: ' + error.message });
+    }
+};
+
+export const deleteLaboratorio = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const result = await labModel.deleteLaboratorioModel(id);
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ message: 'Laboratorio no encontrado' });
+        }
+
+        res.json({ message: 'Laboratorio eliminado con éxito' });
+    } catch (error) {
+        res.status(500).json({ error: 'Error al eliminar: ' + error.message });
+    }
+};

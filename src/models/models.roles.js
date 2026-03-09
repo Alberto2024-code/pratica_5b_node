@@ -26,3 +26,21 @@ export const createRol = async ({  idRol,rol }) => {
     rol
   }
 }
+// Actualizar Rol
+export const updateRolModel = async (id, datos) => {
+    const { rol } = datos;
+    const [result] = await db.query(
+        'UPDATE roles SET rol = ? WHERE idRol = ?',
+        [rol, id]
+    );
+    return result;
+};
+
+// Eliminar Rol
+export const deleteRolModel = async (id) => {
+    const [result] = await db.query(
+        'DELETE FROM roles WHERE idRol = ?',
+        [id]
+    );
+    return result;
+};

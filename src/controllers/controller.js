@@ -49,3 +49,39 @@ export const createModelo = async (req, res) => {
     res.status(500).json({ error: error.message })
   }
 }
+// Actualizar usuario
+export const updateUsuarioModel = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const datos = req.body;
+        
+        // Llamamos al modelo que me pasaste
+        const result = await usuarioModel.updateUsuarioModel(id, datos);
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ message: 'Usuario no encontrado para actualizar' });
+        }
+
+        res.json({ message: 'Usuario actualizado correctamente' });
+    } catch (error) {
+        res.status(500).json({ error: 'Error al actualizar el usuario: ' + error.message });
+    }
+};
+
+// Eliminar usuario
+export const deleteUsuarioModel = async (req, res) => {
+    try {
+        const { id } = req.params;
+        
+        // Llamamos al modelo que me pasaste
+        const result = await usuarioModel.deleteUsuarioModel(id);
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ message: 'Usuario no encontrado para eliminar' });
+        }
+
+        res.json({ message: 'Usuario eliminado exitosamente' });
+    } catch (error) {
+        res.status(500).json({ error: 'Error al eliminar el usuario: ' + error.message });
+    }
+};

@@ -26,10 +26,10 @@ export const getTipoMantenimientoById = async(req,res)=>{
 }
 export const createTipoMantenimiento = async (req, res) => {
   try {
-    const {idTipoMantenimiento,tipoMantenimiento } = req.body
+    const {tipoMantenimiento } = req.body
 
     // Validaciones básicas
-    if (!idTipoMantenimiento || !tipoMantenimiento) {
+    if (!tipoMantenimiento) {
       return res.status(400).json({
         message: 'tipoMantenimiento  son obligatorios'
       })
