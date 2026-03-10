@@ -1,7 +1,16 @@
 import db from '../config/BD.js'
 
 export const getAllUsuarios= async ()=>{
-    const [rows]= await db.query('SELECT * FROM usuarios')
+    const [rows]= await db.query(`
+    SELECT 
+        u.idUsuario, 
+        u.nombreUsuario, 
+        u.matricula, 
+        r.Rol AS rol, 
+        u.estado
+    FROM usuarios u
+    INNER JOIN roles r ON u.idRol = r.idRol
+  `)
     return rows
 }
 

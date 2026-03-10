@@ -2,7 +2,7 @@ import db from '../config/BD.js'
 
 export const getAllNovedades = async()=>
     {
-        const [rows]= await db.query('SELECT * FROM novedades')
+        const [rows]= await db.query('SELECT * FROM novedades');
         return rows
     }
     export const getNovedadesById = async(id)=>

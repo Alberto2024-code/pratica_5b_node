@@ -3,7 +3,7 @@ import db from '../config/BD.js'
 
 export const getAllTipoMantenimiento = async()=>
     {
-        const [rows]= await db.query('SELECT * FROM tipomantenimientos')
+        const [rows]= await db.query('SELECT * FROM tipomantenimientos' )
         return rows
     }
 export const getTipoMantenimientoById= async(id)=>{

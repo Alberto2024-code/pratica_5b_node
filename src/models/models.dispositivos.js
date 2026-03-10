@@ -2,9 +2,15 @@ import db from '../config/BD.js'
 
 
 export const getAllDispositivos = async()=>{
-    const [rows]= await db.query('SELECT * FROM dispositivos'
-    
-  )
+    const [rows]= await db.query(`
+    SELECT 
+        d.idDispositivo, 
+        d.nombreDispositivo, 
+        m.nombreMarca, 
+        d.serie
+    FROM dispositivos d
+    INNER JOIN marcas m ON d.idMarca = m.idMarca
+  `)
     return rows
 }
 export const getDispositivosById = async(id)=>{

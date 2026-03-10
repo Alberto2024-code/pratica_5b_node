@@ -1,7 +1,14 @@
 import db from '../config/BD.js'
 
 export const getAllModelos= async ()=>{
-    const [rows]= await db.query('select * from modelos')
+    const [rows]= await db.query(`
+    SELECT 
+        m.idModelo, 
+        m.nombreModelo, 
+        ma.nombreMarca 
+    FROM modelos m
+    INNER JOIN marcas ma ON m.idMarca = ma.idMarca
+  `)
     return rows
 }
 

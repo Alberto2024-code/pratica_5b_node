@@ -2,7 +2,18 @@ import db from '../config/BD.js'
 
 // Obtener todas las órdenes
 export const getAllOrdenes = async () => {
-  const [rows] = await db.query('SELECT * FROM ordenes')
+  const [rows] = await db.query(`
+    SELECT 
+        o.idOrden, 
+        u.nombreUsuario AS tecnico, 
+        l.nombreLaboratorio AS laboratorio, 
+        o.estado, 
+        o.insumos, 
+        o.horasHombre
+    FROM ordenes o
+    INNER JOIN usuarios u ON o.idUsuario = u.idUsuario
+    INNER JOIN laboratorios l ON o.idLaboratorio = l.idLaboratorio
+  `)
   return rows
 }
 

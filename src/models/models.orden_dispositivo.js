@@ -1,7 +1,17 @@
 import db from '../config/BD.js'
 
 export const getAllOrdenDispositivo= async ()=>{
-    const [rows]= await db.query('select * from orden_dispositivos')
+    const [rows]= await db.query(`
+        SELECT 
+            o.idOrden,
+            d.nombreDispositivo,
+            tm.tipoMantenimiento AS tipoMantenimiento,
+            od.realizado
+        FROM orden_dispositivos od
+        INNER JOIN ordenes o ON od.idOrden = o.idOrden
+        INNER JOIN dispositivos d ON od.idDispositivo = d.idDispositivo
+        INNER JOIN tipomantenimientos tm ON od.idTipoMantenimiento = tm.idTipoMantenimiento
+    `)
     return rows
 }
 
