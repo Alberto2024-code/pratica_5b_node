@@ -4,10 +4,14 @@ export const getAllUsuarios= async ()=>{
     const [rows]= await db.query(`
     SELECT 
         u.idUsuario, 
-        u.nombreUsuario, 
-        u.matricula, 
+        u.nombreUsuario,
+        u.apellidoPaterno,
+        u.apellidoMaterno,
+        u.matricula,
+        u.contrasena,
         r.Rol AS rol, 
-        u.estado
+        u.estado,
+        u.telefono
     FROM usuarios u
     INNER JOIN roles r ON u.idRol = r.idRol
   `)
