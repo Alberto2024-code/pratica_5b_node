@@ -50,7 +50,7 @@ return rows[0]
 export const updateUsuarioModel = async (id, datos) => {
     const { idRol, nombreUsuario, apellidoPaterno, apellidoMaterno, matricula, estado, telefono } = datos;
     const [result] = await db.query(
-        'UPDATE usuarios SET idRol=?, nombreUsuario=?, apellidoPaterno=?, apellidoMaterno=?, matricula=?, estado=?, telefono=? WHERE idUsuario=?',
+        'UPDATE usuarios SET idRol=?, nombreUsuario=?, apellidoPaterno=?, apellidoMaterno=?, matricula=?, estado=?,telefono=? WHERE idUsuario=?',
         [idRol, nombreUsuario, apellidoPaterno, apellidoMaterno, matricula, estado, telefono, id]
     );
     return result;

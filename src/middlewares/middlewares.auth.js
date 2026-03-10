@@ -19,3 +19,4 @@ export const verificarToken = (req,res,next)=>
             res.status(403).json({message:'Token no valido o expirado'});
         }
     };
+    
