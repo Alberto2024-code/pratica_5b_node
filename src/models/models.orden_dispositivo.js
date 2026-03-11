@@ -4,8 +4,10 @@ export const getAllOrdenDispositivo= async ()=>{
     const [rows]= await db.query(`
         SELECT 
             o.idOrden,
+            d.idDispositivo,
             d.nombreDispositivo,
-            tm.tipoMantenimiento AS tipoMantenimiento,
+            tm.idTipoMantenimiento,
+            tm.tipoMantenimiento,
             od.realizado
         FROM orden_dispositivos od
         INNER JOIN ordenes o ON od.idOrden = o.idOrden

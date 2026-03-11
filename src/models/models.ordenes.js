@@ -5,8 +5,10 @@ export const getAllOrdenes = async () => {
   const [rows] = await db.query(`
     SELECT 
         o.idOrden, 
-        u.nombreUsuario AS tecnico, 
-        l.nombreLaboratorio AS laboratorio, 
+        u.nombreUsuario,
+        u.nombreUsuario,
+        l.idLaboratorio, 
+        l.nombreLaboratorio, 
         o.estado, 
         o.insumos, 
         o.horasHombre

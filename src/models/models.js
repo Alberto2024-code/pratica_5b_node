@@ -5,7 +5,8 @@ export const getAllModelos= async ()=>{
     SELECT 
         m.idModelo, 
         m.nombreModelo, 
-        ma.nombreMarca 
+        ma.nombreMarca,
+        ma.idMarca
     FROM modelos m
     INNER JOIN marcas ma ON m.idMarca = ma.idMarca
   `)
