@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import dotenv from 'dotenv'; // Cambiado de 'env' a 'dotenv'
+import dotenv from 'dotenv'; 
 import * as usuarioModel from '../models/models.usuarios.js';
 
 dotenv.config();
@@ -39,22 +39,22 @@ export const login = async (req, res) => {
         
         // Corregido el mensaje de "validas" a "inválidas"
         if (!usuario) {
-            return res.status(401).json({ message: 'Credenciales validas :) ' });
+            return res.status(401).json({ message: 'Credenciales invalidas :) ' });
         }
-        /*Aqui mira en esta validadcion 
+        // Aqui mira en esta validadcion 
         const esValida = await bcrypt.compare(contrasena, usuario.contrasena);
        
         if (!esValida) {
             return res.status(401).json({ message: 'Credenciales inválidas :(' });
         }
-         */
+         
          const token = jwt.sign(
             { 
                 id: usuario.idUsuario, 
                 matricula: usuario.matricula, 
                 rol: usuario.idRol 
             },
-            process.env.JWT_SECRET,
+            process.env.JWT_SECRET || 'clave_temporal_pruebas', // Si no halla la env, usa el string,
             { expiresIn: '8h' }
         );
 
@@ -64,7 +64,12 @@ export const login = async (req, res) => {
         });
 
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Error en el proceso del login' });
+        console.error("ALERTA DE ERROR EN LOGIN:"); // Esto DEBE aparecer en Vercel
+    console.error(error); 
+    res.status(500).json({ 
+        message: "Error interno", 
+        error: error.message, // Esto le llegará a Dylan en su consola
+        stack: error.stack 
+    });
     }
 };
