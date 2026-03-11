@@ -31,7 +31,7 @@ export const register = async (req, res) => {
 
 export const login = async (req, res) => {
     try {
-        const { matricula, contrasena, idRol } = req.body; // Extrae idRol también
+        const { matricula, contrasena } = req.body; 
         
         const usuario = await usuarioModel.findUsuarioByMatricula(matricula);
         
@@ -45,13 +45,6 @@ export const login = async (req, res) => {
         const esValida = await bcrypt.compare(contrasena, usuario.contrasena);
         if (!esValida) {
             return res.status(401).json({ message: 'Credenciales inválidas' });
-        }
-
-        // Validación de Rol que agregaste (¡Muy bien!)
-        if (usuario.idRol != idRol) {
-            return res.status(401).json({ 
-                message: 'El rol seleccionado no corresponde al usuario' 
-            });
         }
 
         const token = jwt.sign(
