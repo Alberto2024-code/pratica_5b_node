@@ -9,7 +9,8 @@ export const getAllUsuarios= async ()=>{
         u.apellidoMaterno,
         u.matricula,
         u.contrasena,
-        r.Rol AS rol, 
+        r.Rol AS rol,
+        r.idRol,
         u.estado,
         u.telefono
     FROM usuarios u
