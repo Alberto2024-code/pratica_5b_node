@@ -39,12 +39,12 @@ export const login = async (req, res) => {
         
         // Corregido el mensaje de "validas" a "inválidas"
         if (!usuario) {
-            return res.status(401).json({ message: 'Credenciales inválidas' });
+            return res.status(401).json({ message: 'Credenciales validas :) ' });
         }
 
         const esValida = await bcrypt.compare(contrasena, usuario.contrasena);
         if (!esValida) {
-            return res.status(401).json({ message: 'Credenciales inválidas' });
+            return res.status(401).json({ message: 'Credenciales inválidas :(' });
         }
 
         const token = jwt.sign(
