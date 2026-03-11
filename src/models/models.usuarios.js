@@ -42,7 +42,7 @@ export const createUsuario = async({idRol, nombreUsuario, apellidoPaterno, apell
 export const  findUsuarioByMatricula = async (matricula) => {
 
 const [rows] = await db.query(
-'SELECT * FROM usuarios WHERE matricula = ?',
+'SELECT idUsuario, matricula, contrasena, idRol FROM usuarios WHERE matricula = ?',
 [matricula]
 )
 return rows[0]
