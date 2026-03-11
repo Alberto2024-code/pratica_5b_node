@@ -41,13 +41,14 @@ export const login = async (req, res) => {
         if (!usuario) {
             return res.status(401).json({ message: 'Credenciales validas :) ' });
         }
-
+        /*Aqui mira en esta validadcion 
         const esValida = await bcrypt.compare(contrasena, usuario.contrasena);
+       
         if (!esValida) {
             return res.status(401).json({ message: 'Credenciales inválidas :(' });
         }
-
-        const token = jwt.sign(
+         */
+         const token = jwt.sign(
             { 
                 id: usuario.idUsuario, 
                 matricula: usuario.matricula, 
