@@ -35,6 +35,8 @@ export const login = async (req, res) => {
         
         const usuario = await usuarioModel.findUsuarioByMatricula(matricula);
         
+        console.log("Datos del usuario encontrado:", usuario);
+        
         // Corregido el mensaje de "validas" a "inválidas"
         if (!usuario) {
             return res.status(401).json({ message: 'Credenciales inválidas' });
