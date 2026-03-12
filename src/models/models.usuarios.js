@@ -49,6 +49,13 @@ return rows[0]
 }
 // Función para actualizar los datos del usuario
 export const updateUsuarioModel = async (id, datos) => {
+   
+    if(!datos || Object.keys(datos).length==0)
+        {
+            console.warn("Intento de actualización fallido: El objeto de datos está vacío.");
+            return null;
+        }
+   
     const { idRol, nombreUsuario, apellidoPaterno, apellidoMaterno, matricula, estado, telefono } = datos;
     const [result] = await db.query(
         'UPDATE usuarios SET idRol=?, nombreUsuario=?, apellidoPaterno=?, apellidoMaterno=?, matricula=?, estado=?,telefono=? WHERE idUsuario=?',
