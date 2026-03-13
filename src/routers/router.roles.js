@@ -4,9 +4,10 @@ import { verificarToken } from '../middlewares/middlewares.auth.js'
 
 const router = Router()
 
+//rutas publicas
 router.get('/', ctrl.getAllRoles);
 router.get('/:id', ctrl.getRolById);
-//....................
+//rutas protegidas
 router.post('/',verificarToken, ctrl.createRol);
 router.put('/:id', verificarToken, ctrl.updateRol);
 router.delete('/:id', verificarToken, ctrl.deleteRol);

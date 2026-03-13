@@ -50,13 +50,13 @@ export const createModelo = async (req, res) => {
   }
 }
 // Actualizar usuario
-export const updateUsuarioModel = async (req, res) => {
+export const updateModeloModel = async (req, res) => {
     try {
         const { id } = req.params;
         const datos = req.body;
         
         // Llamamos al modelo que me pasaste
-        const result = await usuarioModel.updateUsuarioModel(id, datos);
+        const result = await modeloModel.updateModeloModel(id, datos);
 
         if (result.affectedRows === 0) {
             return res.status(404).json({ message: 'Usuario no encontrado para actualizar' });
@@ -69,12 +69,12 @@ export const updateUsuarioModel = async (req, res) => {
 };
 
 // Eliminar usuario
-export const deleteUsuarioModel = async (req, res) => {
+export const deleteModeloModel = async (req, res) => {
     try {
         const { id } = req.params;
         
         // Llamamos al modelo que me pasaste
-        const result = await usuarioModel.deleteUsuarioModel(id);
+        const result = await usuarioModel.deleteModeloModel(id);
 
         if (result.affectedRows === 0) {
             return res.status(404).json({ message: 'Usuario no encontrado para eliminar' });

@@ -30,42 +30,43 @@ export const getNovedadesById = async (req, res) => {
 // POST /api/
 export const createNovedad = async (req, res) => {
   try {
-    const {  idNovedad,
-    tituloNovedad,
-    encabezado,
-    informacion,
-    nombreImagen,
-    Imagen } = req.body
 
-    // Validaciones básicas
-    if ( !idNovedad || !tituloNovedad || !encabezado ||  !informacion || !nombreImagen || !Imagen) {
-      return res.status(400).json({
-        message: 'idNovedad y nombreNovedad son obligatorios'
-      })
+    const {tituloNovedad,encabezado,informacion}=req.body
+    let imagen='';
+    let nombreImagen = 'Sin nombre';
+    if(req.file){
+      imagen = req.file.path;
+      nombreImagen = req.file.filename;
     }
-
-    const nuevoNovedad = await novedadesModel.createNovedad({
-    idNovedad,
-    tituloNovedad,
-    encabezado,
-    informacion,
-    nombreImagen,
-    Imagen
-    })
+    if(!tituloNovedad || !encabezado || !informacion)
+      {
+        return res.status(400).json({ message: 'Titulo,encabezado e informacion son obligatorias'})
+      }
+      const nuevoNovedad = await novedadesModel.createNovedad({
+        idNovedad,
+        tituloNovedad,
+        encabezado,
+        informacion,
+        nombreImagen,
+        imagen
+      })
 
     res.status(201).json(nuevoNovedad)
   } catch (error) {
     res.status(500).json({ error: error.message })
   }
 }
+
 export const updateNovedad = async (req, res) => {
     try {
         const { id } = req.params;
         const datos = req.body;
-
-        if (!datos.tituloNovedad) {
-            return res.status(400).json({ message: 'El título de la novedad es obligatorio' });
-        }
+        
+        if(req.file)
+          {
+            datos.imagen = req.file.path;
+            datos.nombreImagen = req.file.filename;
+          }
 
         const result = await novedadModel.updateNovedadModel(id, datos);
 

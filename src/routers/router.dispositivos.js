@@ -1,15 +1,14 @@
 import { Router } from 'express'
 import * as ctrl from '../controllers/controller.dispositivos.js'
-
+import { verificarToken } from '../middlewares/middlewares.auth.js'
 const router = Router()
 
-// GET /api/
-router.get('/', ctrl.getAllDispositivos)
+// rutas publicas 
+router.get('/', ctrl.getAllDispositivos);
+router.get('/:id', ctrl.getDispositivosById);
 
-// GET /api/
-router.get('/:id', ctrl.getDispositivosById)
-
-// POST /api/
-router.post('/', ctrl.createDispositivo)
-
+//rutas proteguidas 
+router.post('/',verificarToken, ctrl.createDispositivo);
+router.put('/:id',verificarToken,ctrl.updateDispositivosModel);
+router.delete('/:id', verificarToken,ctrl.deleteDispositivosModel);
 export default router

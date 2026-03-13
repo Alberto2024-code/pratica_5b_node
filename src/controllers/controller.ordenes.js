@@ -33,7 +33,7 @@ export const createOrden = async (req, res) => {
     const { idUsuario, idLaboratorio, estado, insumos, horasHombre } = req.body
 
     // Validaciones mínimas
-    if (!idUsuario || !idLaboratorio) {
+    if (!idUsuario || !idLaboratorio ) {
       return res.status(400).json({
         message: 'idUsuario e idLaboratorio son obligatorios'
       })

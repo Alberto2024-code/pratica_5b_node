@@ -3,13 +3,11 @@ import * as ctrl from '../controllers/controllers.laboratorios.js'
 import { verificarToken } from '../middlewares/middlewares.auth.js'
 const router = Router()
 
-// GET /api/laboratorios
+// rutas publicas
 router.get('/', ctrl.getAllLaboratorios)
-
-// GET /api/laboratorios/:id
 router.get('/:id', ctrl.getLaboratorioById)
 
-// POST /api/laboratorios
+// rutas protegidas
 router.post('/', verificarToken ,ctrl.createLaboratorio)
 router.put('/:id', verificarToken, ctrl.updateLaboratorio);
 router.delete('/:id', verificarToken, ctrl.deleteLaboratorio);

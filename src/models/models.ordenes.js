@@ -35,7 +35,7 @@ export const createOrden = async ({ idUsuario,idLaboratorio,estado,insumos,horas
      (idUsuario, idLaboratorio, estado, insumos, horasHombre)
      VALUES (?, ?, ?, ?, ?)`,
     [
-      idUsuario ,
+      idUsuario,
       idLaboratorio,
       estado || 'espera',
       insumos || null,

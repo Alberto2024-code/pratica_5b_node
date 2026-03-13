@@ -52,7 +52,8 @@ export const login = async (req, res) => {
             { 
                 id: usuario.idUsuario, 
                 matricula: usuario.matricula, 
-                rol: usuario.idRol 
+                rol: usuario.idRol,
+                nombre: usuario.nombre
             },
             process.env.JWT_SECRET || 'clave_temporal_pruebas', // Si no halla la env, usa el string,
             { expiresIn: '8h' }

@@ -27,20 +27,19 @@ export const getMarcasById = async (req, res) => {
   }
 }
 
-// POST /api/modelos
+// funcion que permite crear una nueva marca
 export const createMarca = async (req, res) => {
   try {
-    const { idMarca, nombreMarca } = req.body
+    const {nombreMarca } = req.body
 
     // Validaciones básicas
-    if (!idMarca || !nombreMarca) {
+    if (!nombreMarca) {
       return res.status(400).json({
-        message: 'idMarca y nombreMarca son obligatorios'
+        message: 'nombreMarca son obligatorios'
       })
     }
 
     const nuevoMarca = await marcaModel.createMarca({
-      idMarca,
       nombreMarca
     })
 

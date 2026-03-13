@@ -31,6 +31,21 @@ export const createModelo = async({idMarca,nombreModelo})=>{
        nombreModelo
     }
 }
+// Función para actualizar los datos del modelo
+export const updateModeloModel = async(id,datos)=>
+    {
+       const {idMarca,nombreModelo}= datos;
+       const[result]= await db.query('UPDATE modelos SET idMarca=?,nombreModelo=? WHERE idModelo=?',[idMarca,nombreModelo,id]);
+       return result;
+    };
+//Función para eliminar físicamente al modelos 
+export const deleteModeloModel= async(id)=>
+    {
+      const [result] = await db.query('DELETE FROM modelos WHERE idModelo = ? ',
+        [id]
+      );
+     return result;
+    };
 
 
 

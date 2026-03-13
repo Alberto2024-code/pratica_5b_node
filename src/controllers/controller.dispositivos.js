@@ -28,16 +28,16 @@ export const getDispositivosById= async (req,res)=>{
 }
 export const createDispositivo = async(req,res)=>{
     try{
-        const{idDispositivo,idLaboratorio,idModelo,idTipoDispositivo,nombreDispositivo,numeroInventario}=req.body
+        const{idLaboratorio,idModelo,idTipoDispositivo,nombreDispositivo,numeroInventario}=req.body
 
-        if(!idDispositivo || !idLaboratorio || !idModelo || !idTipoDispositivo || !nombreDispositivo || !numeroInventario)
+        if(!idLaboratorio || !idModelo || !idTipoDispositivo || !nombreDispositivo || !numeroInventario)
             {
                 return res.status(400).json({
                     message:'id dispositivos y nombre del dispositivo son obligatorias'
                 })
             }
             const nuevoDispositivo = await dispositivosModel.createDispositivo({
-                idDispositivo,idLaboratorio,idModelo,idTipoDispositivo,nombreDispositivo,numeroInventario
+                idLaboratorio,idModelo,idTipoDispositivo,nombreDispositivo,numeroInventario
             })
             res.status(201).json(nuevoDispositivo)
     }catch(error)
@@ -45,3 +45,30 @@ export const createDispositivo = async(req,res)=>{
         res.status(500).json({error: error.message})
     }
 }
+// funcion que permite actualizar el dispositivo
+export const updateDispositivosModel = async(req,res)=>{
+    try
+    {
+      const {id}= req.params;
+      const result = await dispositivosModel(id,req.body);
+      res.json({message:'dispositivo actualizado'});
+    }
+    catch(error)
+    {
+        res.status(500).json({error:'Error al actualizar'})
+    }
+}
+//function que permite elimiminar al Dispositivo
+export const deleteDispositivosModel = async(req,res)=>
+    {
+        try
+        {
+         const{id}= req.params;
+         const result = await dispositivosModel(id);
+         res.json({message:'Dispositivo eliminado'})
+        }
+        catch(error)
+        {
+            res.status(500).json({error:'Error al eliminar'})
+        }
+    }

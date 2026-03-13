@@ -27,3 +27,20 @@ export const createTipoDispositivo = async ({ tipoDispositivo }) => {
     tipoDispositivo
   }
 }
+// Función para actualizar los datos del tipo dispositivo
+export const updateTipoDispositivoModel = async(id,datos)=>{
+
+  const{tipoDispositivo}= datos;
+  const[result]=await db.query('UPDATE tipodispositivos SET tipoDispositivo=? WHERE idTipoDispositivo=?',
+    [tipoDispositivo,id]
+  );
+  return result;
+}
+// Función para eliminar físicamente al tipo dispositivo
+export const deleteTipoDipositivoModel = async(id)=>
+  {
+    const[result]= await db.query('DELETE FROM tipodispositivos WHERE idTipoDispositivo=?',
+      [id]
+    );
+    return result;
+  }

@@ -1,6 +1,6 @@
 import db from '../config/BD.js'
 
-
+//funcion que permite consultar lo que tiene registrado la api 
 export const getAllDispositivos = async()=>{
     const [rows]= await db.query(`
     SELECT 
@@ -20,12 +20,14 @@ export const getAllDispositivos = async()=>{
   `)
     return rows
 }
+//fruncion que permite al usuario del fronend poder buscar un dispositivo por medio de id
 export const getDispositivosById = async(id)=>{
     const [rows]= await db.query('SELECT * FROM dispositivos WHERE idDispositivos=?',
     [id]
     )
     return rows[0]
 }
+// funcion que permite que fronend pueda crear un nuevo usuario para la api
 export const createDispositivo = async ({ idLaboratorio,idModelo,idTipoDispositivo,nombreDispositivo,numeroInventario}) => {
 
 const [result] = await db.query(
@@ -41,7 +43,21 @@ return {
     nombreDispositivo,
     numeroInventario
 }
+}
+//funcion que permite actualzar lo datos que el fronend pide actualizar
+export const updateDispositivosModel = async(id,datos)=>{
 
+    const {idLaboratorio,idModelo,idTipoDispositivo,nombreDispositivo,numeroInventario}= datos;
+    const [result]= await db.query('UPDATE dispositivos SET idLaboratorio=?,idModelo=?,idTipoDispositivo=?,nombreDispositivo=?,numeroInventario=? WHERE idDispositivos = ?',
+    [idLaboratorio,idModelo,idTipoDispositivo,nombreDispositivo,numeroInventario]);
+    return result;
+}
+//funcion que permite eliminar lo que el fronend pida 
+export const deleteDispositivosModel =async(id)=>{
+    const [result] = await db.query('DELETE FROM dispositivos WHERE idDispositivo=?',
+        [id]
+    );
+    return result;
 }
 
 

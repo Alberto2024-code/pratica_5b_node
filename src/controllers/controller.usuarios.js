@@ -61,7 +61,7 @@ export const createUsuario = async (req, res) => {
     }
  
 }
-// si
+// funcion que permite actualizar el usuario
 export const updateUsuarioModel = async (req, res) => {
     try {
         const { id } = req.params;
@@ -71,7 +71,7 @@ export const updateUsuarioModel = async (req, res) => {
         res.status(500).json({ error: 'Error al actualizar' });
     }
 };
-
+//function que permite elimiminar al usuario
 export const deleteUsuarioModel = async (req, res) => {
     try {
         const { id } = req.params;

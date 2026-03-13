@@ -3,13 +3,11 @@ import * as ctrl from '../controllers/controller.marcas.js'
 import { verificarToken } from '../middlewares/middlewares.auth.js'
 const router = Router()
 
-// GET /api/
+// rutas publicas
 router.get('/', ctrl.getAllMarca)
-
-// GET /api/
 router.get('/:id', ctrl.getMarcasById)
 
-// POST /api/
+// rutas protegidas
 router.post('/',verificarToken, ctrl.createMarca)
 router.put('/:id', verificarToken, ctrl.updateMarca);
 router.delete('/:id', verificarToken, ctrl.deleteMarca);

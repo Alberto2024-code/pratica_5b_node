@@ -4,16 +4,13 @@ import { verificarToken } from '../middlewares/middlewares.auth.js'
 
 const router = Router()
 
-// GET /api/modelos
+//rutas publicas
 router.get('/', ctrl.getAllModelos)
-
-// GET /api/modelos/:id
 router.get('/:id', ctrl.getModeloById)
 
-// POST /api/modelos
+//rutas proteguidas
 router.post('/', verificarToken, ctrl.createModelo)
-
-router.put('/:id', verificarToken, ctrl.updateUsuarioModel);
-router.delete('/:id', verificarToken, ctrl.deleteUsuarioModel);
+router.put('/:id', verificarToken, ctrl.updateModeloModel);
+router.delete('/:id', verificarToken, ctrl.deleteModeloModel);
 
 export default router

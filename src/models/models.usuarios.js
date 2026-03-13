@@ -1,5 +1,5 @@
 import db from '../config/BD.js'
-
+//funcion que permite consultar lo que tiene registrado la api 
 export const getAllUsuarios= async ()=>{
     const [rows]= await db.query(`
     SELECT 
@@ -19,14 +19,14 @@ export const getAllUsuarios= async ()=>{
     return rows
 }
 
-// Obtener modelo por ID
+//fruncion que permite al usuario del fronend poder buscar un dispositivo por medio de id
 export const getUsuariosById = async (id) => { const [rows] = await db.query(
     'SELECT * FROM usuarios WHERE idUsuario = ?',
     [id]
   )
   return rows[0]
 }
-// crea un usuario
+// crea un usuario nuevo para la api
 export const createUsuario = async({idRol, nombreUsuario, apellidoPaterno, apellidoMaterno, matricula, contrasena, estado, telefono}) => {
     
     const [result] = await db.query(
@@ -34,7 +34,7 @@ export const createUsuario = async({idRol, nombreUsuario, apellidoPaterno, apell
         [idRol, nombreUsuario, apellidoPaterno, apellidoMaterno, matricula, contrasena, estado, telefono]
     )
     return {
-        idUsuario: result.insertId, // Aquí recuperamos el ID que la base de datos creó
+        idUsuario: result.insertId, 
         idRol, nombreUsuario, apellidoPaterno, apellidoMaterno, matricula, contrasena, estado, telefono
     }
 }

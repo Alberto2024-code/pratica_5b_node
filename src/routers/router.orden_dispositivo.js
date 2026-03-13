@@ -4,13 +4,11 @@ import { verificarToken } from '../middlewares/middlewares.auth.js'
 
 const router = Router()
 
-// GET /api/
+// rutas publicas
 router.get('/', ctrl.getAllOrdenDispositivos)
-
-// GET /api/
 router.get('/:id', ctrl.getOrdenDispositivoById)
 
-// POST /api/
+// rutas protegidas
 router.post('/', verificarToken, ctrl.createOrdenDispositivo)
 router.put('/:id', verificarToken, ctrl.updateOrdenDispositivo);
 router.delete('/:id', verificarToken, ctrl.deleteOrdenDispositivo);

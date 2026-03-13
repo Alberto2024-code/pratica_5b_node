@@ -47,3 +47,30 @@ export const createTipoDispositivo = async (req, res) => {
     res.status(500).json({ error: error.message })
   }
 }
+export const updateTipoDispositivoModel = async(req,res)=>
+  {
+    try
+    {
+      const{id}= req.params;
+      const result = await updateTipoDispositivoModel(id,req.body);
+      res.status(500).json({message:'Tipo dispositivo actualizado'})
+    }
+    catch(error)
+    {
+      res.status(500).json({error:'Error al actualizarlo  el Tipo dispositivo'})
+    }
+  }
+  //function que permite elimiminar al tipo dispositivo
+  export const deleteTipoDipositivoModel = async(req,res)=>
+    {
+      try
+      {
+        const{id} = req.params;
+        const result = await tipoDispositivoModel(id);
+        res.json({message:'Tipo dispositivo eliminado'})
+      }
+      catch(error)
+      {
+        res.status(500).json({error:'error al eliminar'})
+      }
+    }
