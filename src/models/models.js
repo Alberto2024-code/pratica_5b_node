@@ -23,7 +23,7 @@ export const getModeloById = async (id) => { const [rows] = await db.query(
 
 export const createModelo = async({idMarca,nombreModelo})=>{
     const [restult]=await db.query(
-        'INSERT INTO grupos(idMarca,nombreModelo) VALUES (?,?)'
+        'INSERT INTO modelos(idMarca,nombreModelo) VALUES (?,?)'
         ,[idMarca,nombreModelo])
     return {
         idModelo: restult.insertId,

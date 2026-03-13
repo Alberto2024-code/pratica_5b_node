@@ -27,7 +27,7 @@ export const getOrdenDispositivoById = async (id) => { const [rows] = await db.q
 
 export const createOrdenDispositivo = async({idOrden,idDispositivo,idTipoMantenimiento,realizado})=>{
     const [restult]=await db.query(
-        'INSERT INTO orden_dispositivo(idOrden,idDispositivo,idTipoMantenimiento,realizado) values (?,?,?,?)'
+        'INSERT INTO orden_dispositivos (idOrden,idDispositivo,idTipoMantenimiento,realizado) values (?,?,?,?)'
         ,[idOrden,idDispositivo,idTipoMantenimiento,realizado])
     return {
         idOrden:restult.insertId,
