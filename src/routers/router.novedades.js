@@ -9,9 +9,8 @@ router.get('/', ctrl.getAllNovedades);
 router.get('/:id', ctrl.getNovedadesById);
 
 // rutas privadas 
-router.post('/upload',verificarToken , upload.single('imagen'),ctrl.createNovedad);
-router.post('/',verificarToken, ctrl.createNovedad);
-router.put('/:id', verificarToken, ctrl.updateNovedad);
+router.post('/', verificarToken, upload.single('imagen'), ctrl.createNovedad);
+router.put('/:id', verificarToken, upload.single('imagen'), ctrl.updateNovedad);
 router.delete('/:id', verificarToken, ctrl.deleteNovedad);
 
 export default router

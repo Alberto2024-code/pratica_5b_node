@@ -30,26 +30,28 @@ export const getNovedadesById = async (req, res) => {
 // POST /api/
 export const createNovedad = async (req, res) => {
   try {
-
-    const {tituloNovedad,encabezado,informacion}=req.body
-    let imagen='';
+    const { tituloNovedad, encabezado, informacion } = req.body
+    
+    let Imagen = ''; // Usamos Mayúscula para coincidir con tu BD
     let nombreImagen = 'Sin nombre';
-    if(req.file){
-      imagen = req.file.path;
+
+    if (req.file) {
+      Imagen = req.file.path;
       nombreImagen = req.file.filename;
     }
-    if(!tituloNovedad || !encabezado || !informacion)
-      {
-        return res.status(400).json({ message: 'Titulo,encabezado e informacion son obligatorias'})
-      }
-      const nuevoNovedad = await novedadesModel.createNovedad({
-        idNovedad,
-        tituloNovedad,
-        encabezado,
-        informacion,
-        nombreImagen,
-        imagen
-      })
+
+    if (!tituloNovedad || !encabezado || !informacion) {
+      return res.status(400).json({ message: 'Título, encabezado e información son obligatorios' })
+    }
+
+    const nuevoNovedad = await novedadesModel.createNovedad({
+      // Quitamos idNovedad porque es Auto-increment
+      tituloNovedad,
+      encabezado,
+      informacion,
+      nombreImagen,
+      Imagen
+    })
 
     res.status(201).json(nuevoNovedad)
   } catch (error) {
@@ -62,13 +64,13 @@ export const updateNovedad = async (req, res) => {
         const { id } = req.params;
         const datos = req.body;
         
-        if(req.file)
-          {
-            datos.imagen = req.file.path;
+        if (req.file) {
+            datos.Imagen = req.file.path;
             datos.nombreImagen = req.file.filename;
-          }
+        }
 
-        const result = await novedadModel.updateNovedadModel(id, datos);
+        // Corregido: novedadesModel (en plural como el import)
+        const result = await novedadesModel.updateNovedadModel(id, datos);
 
         if (result.affectedRows === 0) {
             return res.status(404).json({ message: 'Novedad no encontrada' });
@@ -83,7 +85,8 @@ export const updateNovedad = async (req, res) => {
 export const deleteNovedad = async (req, res) => {
     try {
         const { id } = req.params;
-        const result = await novedadModel.deleteNovedadModel(id);
+        // Corregido: novedadesModel
+        const result = await novedadesModel.deleteNovedadModel(id);
 
         if (result.affectedRows === 0) {
             return res.status(404).json({ message: 'Novedad no encontrada' });
