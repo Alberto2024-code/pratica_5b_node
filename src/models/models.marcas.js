@@ -15,7 +15,7 @@ export const getMarcasById = async (id) => {
 
 export const createMarca = async ({nombreMarca }) => {
   const [result] = await db.query(
-    'INSERT INTO marca (idMarca,nombreMarca) VALUES (?,?)',
+    'INSERT INTO marca (nombreMarca) VALUES (?)',
     [nombreMarca]
   )
 
