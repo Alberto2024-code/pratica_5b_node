@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import * as ctrl from '../controllers/controller.novedades.js'
 import { verificarToken } from '../middlewares/middlewares.auth.js'
-import upload from '../config/Cloudynary.js'
+import {upload} from '../config/Cloudynary.js'
 const router = Router()
 
 // rutas publicas 
