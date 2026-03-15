@@ -26,7 +26,7 @@ export const createModelo = async({idMarca,nombreModelo})=>{
         'INSERT INTO modelos(idMarca,nombreModelo) VALUES (?,?)'
         ,[idMarca,nombreModelo])
     return {
-        idModelo: restult.insertId,
+       idModelo: restult.insertId,
        idMarca,
        nombreModelo
     }

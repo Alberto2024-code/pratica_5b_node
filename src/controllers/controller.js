@@ -74,14 +74,14 @@ export const deleteModeloModel = async (req, res) => {
         const { id } = req.params;
         
         // Llamamos al modelo que me pasaste
-        const result = await usuarioModel.deleteModeloModel(id);
+        const result = await modeloModel.deleteModeloModel(id);
 
         if (result.affectedRows === 0) {
-            return res.status(404).json({ message: 'Usuario no encontrado para eliminar' });
+            return res.status(404).json({ message: 'modelo no encontrado para eliminar' });
         }
 
-        res.json({ message: 'Usuario eliminado exitosamente' });
+        res.json({ message: 'Modelo eliminado exitosamente' });
     } catch (error) {
-        res.status(500).json({ error: 'Error al eliminar el usuario: ' + error.message });
+        res.status(500).json({ error: 'Error al eliminar el modelo: '});
     }
 };
