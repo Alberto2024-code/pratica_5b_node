@@ -12,12 +12,12 @@ export const getAllDispositivos = async()=>{
         d.idLaboratorio,
         lab.nombreLaboratorio,
         d.idTipoDispositivo,
-        d.tipoDispositivo
+        t.tipoDispositivo
 
     FROM dispositivos d
     INNER JOIN modelos mo ON d.idModelo = mo.idModelo
     INNER JOIN laboratorios lab ON d.idLaboratorio = lab.idLaboratorio
-
+    INNER JOIN tipodispositivos t ON d.idTipoDispositivo = t.idTipoDispositivo
   `)
     return rows
 }
