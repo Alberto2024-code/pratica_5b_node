@@ -53,7 +53,7 @@ export const login = async (req, res) => {
                 id: usuario.idUsuario, 
                 matricula: usuario.matricula, 
                 rol: usuario.idRol,
-                nombre: usuario.nombre
+                nombre: usuario.nombreUsuario
             },
             process.env.JWT_SECRET || 'clave_temporal_pruebas', // Si no halla la env, usa el string,
             { expiresIn: '8h' }
@@ -61,7 +61,7 @@ export const login = async (req, res) => {
 
         res.json({ 
             token, 
-            usuario: { id: usuario.idUsuario, rol: usuario.idRol, matricula: usuario.matricula, nombre: usuario.nombre} 
+            usuario: { id: usuario.idUsuario, rol: usuario.idRol, matricula: usuario.matricula, nombre: usuario.nombreUsuario} 
         });
 
     } catch (error) {

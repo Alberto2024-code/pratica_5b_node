@@ -64,7 +64,7 @@ export const deleteDispositivosModel = async(req,res)=>
         try
         {
          const{id}= req.params;
-         const result = await dispositivosModel(id);
+         const result = await dispositivosModel.deleteDispositivosModel(id);
          res.json({message:'Dispositivo eliminado'})
         }
         catch(error)
