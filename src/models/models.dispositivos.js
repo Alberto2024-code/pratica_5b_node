@@ -49,7 +49,7 @@ return {
 export const updateDispositivosModel = async(id,datos)=>{
 
     const {idLaboratorio,idModelo,idTipoDispositivo,nombreDispositivo,numeroInventario}= datos;
-    const [result]= await db.query('UPDATE dispositivos SET idLaboratorio=?,idModelo=?,idTipoDispositivo=?,nombreDispositivo=?,numeroInventario=? WHERE idDispositivos = ?',
+    const [result]= await db.query('UPDATE dispositivos SET idLaboratorio=?,idModelo=?,idTipoDispositivo=?,nombreDispositivo=?,numeroInventario=? WHERE idDispositivo = ?',
     [idLaboratorio,idModelo,idTipoDispositivo,nombreDispositivo,numeroInventario]);
     return result;
 }
