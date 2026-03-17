@@ -14,7 +14,7 @@ export const getAllDispositivos = async(req,res)=>{
 export const getDispositivosById= async (req,res)=>{
     try
     {
-        const dispositivos = await dispositivosModel.getDispositivos(req.params.id)
+        const dispositivos = await dispositivosModel.getDispositivosById(req.params.id)
         if(!dispositivos)
             {
                 return res.status(404).json({
