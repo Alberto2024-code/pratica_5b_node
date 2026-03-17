@@ -50,11 +50,11 @@ export const updateDispositivosModel = async(id,datos)=>{
 
     const {idLaboratorio,idModelo,idTipoDispositivo,nombreDispositivo,numeroInventario}= datos;
     const [result]= await db.query('UPDATE dispositivos SET idLaboratorio=?,idModelo=?,idTipoDispositivo=?,nombreDispositivo=?,numeroInventario=? WHERE idDispositivo = ?',
-    [idLaboratorio,idModelo,idTipoDispositivo,nombreDispositivo,numeroInventario]);
+    [idLaboratorio,idModelo,idTipoDispositivo,nombreDispositivo,numeroInventario,id]);
     return result;
 }
 //funcion que permite eliminar lo que el fronend pida 
-export const deleteDispositivosModel =async(id)=>{
+export const deleteDispositivosModel = async(id)=>{
     const [result] = await db.query('DELETE FROM dispositivos WHERE idDispositivo=?',
         [id]
     );
