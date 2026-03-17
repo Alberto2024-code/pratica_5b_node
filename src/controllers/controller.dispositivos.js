@@ -49,8 +49,8 @@ export const createDispositivo = async(req,res)=>{
 export const updateDispositivosModel = async(req,res)=>{
     try
     {
-      const {id}= req.params;
-      const result = await dispositivosModel(id,req.body);
+      const { id }= req.params;
+      const result = await dispositivosModel.updateDispositivosModel(id,req.body);
       res.json({message:'dispositivo actualizado'});
     }
     catch(error)
