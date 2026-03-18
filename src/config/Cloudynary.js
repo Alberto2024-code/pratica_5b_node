@@ -3,7 +3,7 @@ import { CloudinaryStorage } from 'multer-storage-cloudinary';
 import multer from 'multer';
 import dotenv from 'dotenv';
 
-// 1. Corregido: Se debe llamar a config() así
+
 dotenv.config();
 
 // 2. Configuración

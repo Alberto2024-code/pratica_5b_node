@@ -6,7 +6,6 @@ export const getAllOrdenes = async () => {
     SELECT 
         o.idOrden, 
         u.nombreUsuario,
-        u.nombreUsuario,
         l.idLaboratorio, 
         l.nombreLaboratorio, 
         o.estado, 

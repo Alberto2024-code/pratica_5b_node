@@ -13,7 +13,7 @@ import tipo_dispositivoRouter from './routers/router.tipo_dispositivo.js'
 import tipo_matenimientoRouter from './routers/router.tipo_mantenimiento.js'
 import usuariosRouter from './routers/router.usuarios.js'
 import authRouter from './routers/router.auth.js'
-
+import ordenDeTrabajo from './routers/router.ordenDeTrabajo.js'
 const app = express()
 
 // middleware
@@ -33,8 +33,8 @@ app.use('/api/roles', rolesRouter)
 app.use('/api/tipo_dispositivo', tipo_dispositivoRouter)
 app.use('/api/tipomantenimientos', tipo_matenimientoRouter)
 app.use('/api/usuarios', usuariosRouter)
-
-
+app.use('/api/ordenes',orde_dispositivoRouter)
+app.use('/api/ordenTrabajo',ordenDeTrabajo)
 app.get('/', (req, res) => {
   res.send('API de mantenimiento funcionando correctamente ')
 })
