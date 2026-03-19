@@ -9,15 +9,15 @@ export const getAllOrdenes = async()=>{
         l.idLaboratorio,
         l.nombreLaboratorio,
         o.estado,
-        o.horasHombre
+        o.horasHombre,
         o.fechaCreacion
     FROM ordenes o
-    LEFT JOIN usuarios u ON o.idUusuario = u.idUsuario
+    LEFT JOIN usuarios u ON o.idUsuario = u.idUsuario
     LEFT JOIN laboratorios l ON o.idLaboratorio= l.idLaboratorio
     LEFT JOIN orden_dispositivos od  ON o.idOrden = od.idOrden
     LEFT JOIN dispositivos d ON d.idDispositivo = od.idDispositivo
     LEFT JOIN tipomantenimientos tm ON  tm.idTipoMantenimiento = od.idTipoMantenimiento
-    ORDER BY  O.idOrden DESC;
+    ORDER BY  o.idOrden DESC;
     `);
     return rows
 }

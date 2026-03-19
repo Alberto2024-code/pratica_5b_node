@@ -19,7 +19,7 @@ const app = express()
 // middleware
 app.use(cors())
 app.use(express.json())
-
+app.use(express.urlencoded({ extended: true }));
 // rutas
 app.use('/api/auth', authRouter)
 app.use('/api/modelos', modelosRouter)

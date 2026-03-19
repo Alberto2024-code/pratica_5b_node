@@ -27,17 +27,24 @@ export const getUsuariosById = async (id) => { const [rows] = await db.query(
   return rows[0]
 }
 // crea un usuario nuevo para la api
-export const createUsuario = async({idRol, nombreUsuario, apellidoPaterno, apellidoMaterno, matricula, contrasena, estado, telefono}) => {
-    
+
+export const createUsuario = async (datos) => {
+    const { idRol, nombreUsuario, apellidoPaterno, apellidoMaterno, matricula, contrasena, estado, telefono } = datos;
+
+    // ejecutamos la consulta
     const [result] = await db.query(
-        'INSERT INTO usuarios (idRol, nombreUsuario, apellidoPaterno, apellidoMaterno, matricula, contrasena, estado, telefono) VALUES (?,?,?,?,?,?,?,?)',
-        [idRol, nombreUsuario, apellidoPaterno, apellidoMaterno, matricula, contrasena, estado, telefono]
-    )
+        `INSERT INTO usuarios 
+        (idRol, nombreUsuario, apellidoPaterno, apellidoMaterno, matricula, contrasena, estado, telefono)
+         VALUES (?,?,?,?,?,?,?,?)`,
+        [idRol, nombreUsuario, apellidoPaterno, apellidoMaterno, matricula, contrasena, estado || 1, telefono]
+    );
+
+   
     return {
         idUsuario: result.insertId, 
-        idRol, nombreUsuario, apellidoPaterno, apellidoMaterno, matricula, contrasena, estado, telefono
-    }
-}
+        ...datos 
+    };
+};
 
 export const  findUsuarioByMatricula = async (matricula) => {
 

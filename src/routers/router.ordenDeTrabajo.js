@@ -15,7 +15,6 @@ router.get('/:id', ctrl.getOrdenCompleta);
 //rutas protegidas 
 //Crear la cabecera de la orden (Primero se crea la orden vacía)
 router.post('/', verificarToken, ctrl.createOrden);
-
 //Agregar dispositivos a esa orden (Se usa el ID de la orden en la URL)
 router.post('/:id/dispositivos', verificarToken, ctrl.postDispositivoAOrden);
 

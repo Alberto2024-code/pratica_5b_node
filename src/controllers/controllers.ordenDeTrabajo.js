@@ -1,6 +1,16 @@
 import * as ordenDeTrabajoModel from '../models/models.ordenDeTrabajo.js';
 import { estructurarOrden } from '../helpers/ordenDeTrabajo.js';
 
+
+export const getAllOrdenes = async (req, res) => {
+    try {
+        const ordenes = await ordenDeTrabajoModel.getAllOrdenes(); // Asumiendo que tienes esta función en el modelo
+        res.json(ordenes);
+    } catch (error) {
+        res.status(500).json({ message: "Error al obtener la lista de órdenes", error: error.message });
+    }
+};
+
 export const getOrdenCompleta = async (req, res) => {
     try {
         const { id } = req.params;
@@ -69,14 +79,7 @@ export const patchEstado = async (req, res) => {
     }
 };
 
-export const getAllOrdenes = async (req, res) => {
-    try {
-        const ordenes = await ordenDeTrabajoModel.getAllOrdenes(); // Asumiendo que tienes esta función en el modelo
-        res.json(ordenes);
-    } catch (error) {
-        res.status(500).json({ message: "Error al obtener la lista de órdenes", error: error.message });
-    }
-};
+
 export const getDispositivosByLaboratorio = async (req, res) => {
     try {
         const { id } = req.params;
