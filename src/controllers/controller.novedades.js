@@ -30,34 +30,34 @@ export const getNovedadesById = async (req, res) => {
 // POST /api/
 export const createNovedad = async (req, res) => {
   try {
-    const { tituloNovedad, encabezado, informacion } = req.body
+    const { tituloNovedad, encabezado, informacion } = req.body;
     
-    let Imagen = ''; // Usamos Mayúscula para coincidir con tu BD
+    // Multer pone la URL de Cloudinary en req.file.path
+    let Imagen = ''; 
     let nombreImagen = 'Sin nombre';
 
     if (req.file) {
-      Imagen = req.file.path;
-      nombreImagen = req.file.filename;
+      Imagen = req.file.path; // URL de Cloudinary
+      nombreImagen = req.file.filename; // ID público en Cloudinary
     }
 
     if (!tituloNovedad || !encabezado || !informacion) {
-      return res.status(400).json({ message: 'Título, encabezado e información son obligatorios' })
+      return res.status(400).json({ message: 'Campos obligatorios faltantes' });
     }
 
     const nuevoNovedad = await novedadesModel.createNovedad({
-      // Quitamos idNovedad porque es Auto-increment
       tituloNovedad,
       encabezado,
       informacion,
       nombreImagen,
       Imagen
-    })
+    });
 
-    res.status(201).json(nuevoNovedad)
+    res.status(201).json(nuevoNovedad);
   } catch (error) {
-    res.status(500).json({ error: error.message })
+    res.status(500).json({ error: error.message });
   }
-}
+};
 
 export const updateNovedad = async (req, res) => {
     try {

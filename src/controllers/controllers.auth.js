@@ -7,48 +7,23 @@ dotenv.config();
 
 export const register = async (req, res) => {
     try {
-        // 1. Extraemos TODOS los campos del body
-        const { 
-            idRol, 
-            nombreUsuario, 
-            apellidoPaterno, 
-            apellidoMaterno, 
-            matricula, 
-            contrasena, 
-            telefono 
-        } = req.body;
+        const { matricula, contrasena, idRol } = req.body;
         
-        // 2. Validación: Verifica que el nombre no venga vacío
-        if (!matricula || !contrasena || !idRol || !nombreUsuario) {
-            return res.status(400).json({ message: 'Nombre, Matrícula, Contraseña e idRol son obligatorios' });
+        // Es mejor usar 400 (Bad Request) para campos faltantes
+        if (!matricula || !contrasena || !idRol) {
+            return res.status(400).json({ message: 'Todos los campos son obligatorios' });
         }
 
         const salt = await bcrypt.genSalt(10);
         const passwordHash = await bcrypt.hash(contrasena, salt);
 
-        // 3. ENVIAMOS LAS VARIABLES REALES (no comillas vacías)
-        const nuevoUsuario = await usuarioModel.createUsuario({
-            idRol,
-            nombreUsuario,
-            apellidoPaterno,
-            apellidoMaterno,
-            matricula,
-            contrasena: passwordHash,
-            estado: 'Activo',
-            telefono
-        }); 
-        
-        // 4. Respondemos con el objeto creado (esto sirve para tu evidencia)
-        res.status(201).json({ 
-            message: 'Usuario creado con éxito', 
-            usuario: nuevoUsuario 
-        });
 
+        
+        // ¡IMPORTANTE!: Pasa el idRol aquí para que se guarde en la BD
+        const nuevoId = await usuarioModel.createUsuario({idRol,matricula,contrasena: passwordHash,nombreUsuario:'', apellidoPaterno:'',apellidoMaterno: '',estado:'Activo',telefono:''}); 
+        
+        res.status(201).json({ message: 'Usuario creado con éxito', id: nuevoId });
     } catch (error) {
-        // Manejo específico para las pruebas PA-24 y PA-25 (Duplicados)
-        if (error.code === 'ER_DUP_ENTRY') {
-            return res.status(400).json({ error: "La matrícula ya existe en el sistema" });
-        }
         console.error(error);
         res.status(500).json({ error: 'Error interno en el servidor' });
     }

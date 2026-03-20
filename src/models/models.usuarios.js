@@ -27,22 +27,21 @@ export const getUsuariosById = async (id) => { const [rows] = await db.query(
   return rows[0]
 }
 // crea un usuario nuevo para la api
-
+// Opción recomendada: recibe un solo objeto llamado 'datos'
 export const createUsuario = async (datos) => {
+    // 1. Extraemos todo de 'datos'
     const { idRol, nombreUsuario, apellidoPaterno, apellidoMaterno, matricula, contrasena, estado, telefono } = datos;
 
-    // ejecutamos la consulta
+    // 2. Ejecutamos la consulta
     const [result] = await db.query(
-        `INSERT INTO usuarios 
-        (idRol, nombreUsuario, apellidoPaterno, apellidoMaterno, matricula, contrasena, estado, telefono)
-         VALUES (?,?,?,?,?,?,?,?)`,
+        'INSERT INTO usuarios (idRol, nombreUsuario, apellidoPaterno, apellidoMaterno, matricula, contrasena, estado, telefono) VALUES (?,?,?,?,?,?,?,?)',
         [idRol, nombreUsuario, apellidoPaterno, apellidoMaterno, matricula, contrasena, estado || 1, telefono]
     );
 
-   
+    // 3. Retornamos la respuesta limpia
     return {
         idUsuario: result.insertId, 
-        ...datos 
+        ...datos // Esto incluye todos los campos automáticamente
     };
 };
 
