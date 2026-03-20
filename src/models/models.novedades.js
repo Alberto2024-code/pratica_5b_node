@@ -12,19 +12,22 @@ const[rows] = await db.query(
 )
 return rows[0]
 }
-export const createNovedad = async({tituloNovedad,encabezado,informacion,nombreImagen,Imagen})=>{ 
-const[restult] = await db.query(
-    'INSERT INTO novedades(tituloNovedad,encabezado,informacion,nombreImagen,Imagen) VALUES (?,?,?,?,?)',[idNovedad,tituloNovedad,encabezado,informacion,nombreImagen,Imagen]
-)
-return{
-    idNovedad: restult.insertId,
-    tituloNovedad,
-    encabezado,
-    informacion,
-    nombreImagen,
-    Imagen
-}
-}
+export const createNovedad = async ({ tituloNovedad, encabezado, informacion, nombreImagen, imagen }) => {
+    const fecha = new Date();
+    const [result] = await db.query(
+        'INSERT INTO novedades (tituloNovedad, encabezado, fecha, informacion, nombreImagen, imagen) VALUES (?, ?, ?, ?, ?, ?)',
+        [tituloNovedad, encabezado, fecha, informacion, nombreImagen, imagen]
+    );
+    return {
+        idNovedad: result.insertId, 
+        tituloNovedad,
+        encabezado,
+        fecha,
+        informacion,
+        nombreImagen,
+        imagen
+    };
+};
 // Actualizar Novedad
 export const updateNovedadModel = async (id, datos) => {
     const { tituloNovedad, encabezado, informacion, nombreImagen, Imagen } = datos;
