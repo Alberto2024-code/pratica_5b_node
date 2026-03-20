@@ -33,7 +33,6 @@ app.use('/api/roles', rolesRouter)
 app.use('/api/tipo_dispositivo', tipo_dispositivoRouter)
 app.use('/api/tipomantenimientos', tipo_matenimientoRouter)
 app.use('/api/usuarios', usuariosRouter)
-app.use('/api/ordenes',orde_dispositivoRouter)
 app.use('/api/ordenTrabajo',ordenDeTrabajo)
 app.get('/', (req, res) => {
   res.send('API de mantenimiento funcionando correctamente ')
