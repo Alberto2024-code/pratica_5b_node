@@ -65,9 +65,9 @@ export const getDatosParaPDF = async (id) => {
     const [rows] = await db.query(`
         SELECT 
             o.idOrden, o.fechaCreacion, o.estado, o.insumos, o.horasHombre,
-            u.nombreUsuario as tecnico,
+            u.nombreUsuario,
             l.nombreLaboratorio,
-            d.nombreDispositivo, d.serie,
+            d.nombreDispositivo,
             tm.nombreTipoMantenimiento
         FROM ordenes o
         INNER JOIN usuarios u ON o.idUsuario = u.idUsuario
