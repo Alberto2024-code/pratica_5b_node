@@ -11,11 +11,10 @@ export const estructurarOrden = (rows) => {
         estado: rows[0].estado,
         // Aquí "mapeamos" solo los dispositivos
         dispositivos: rows.map(row => ({
-            id: row.idDispositivo,
-            nombre: row.nombreDispositivo,
-            serie: row.serie,
-            mantenimiento: row.nombreTipoMantenimiento
-        }))
+         id: row.idDispositivo,      
+         nombre: row.nombreDispositivo,
+         mantenimiento: row.mantenimiento 
+}))
     };
 
     return orden;
