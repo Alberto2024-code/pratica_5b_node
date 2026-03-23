@@ -10,7 +10,11 @@ export const getAllOrdenes = async()=>{
         l.nombreLaboratorio,
         o.estado,
         o.horasHombre,
-        o.fechaCreacion
+        o.fechaCreacion,
+        d.nombreDispositivo AS nombreDispositivo,
+        tm.tipoMantenimiento AS mantenimiento,
+        d.idLaboratorio AS laboratorio,
+        d.numeroInventario AS numeroInventario
     FROM ordenes o
     LEFT JOIN usuarios u ON o.idUsuario = u.idUsuario
     LEFT JOIN laboratorios l ON o.idLaboratorio= l.idLaboratorio

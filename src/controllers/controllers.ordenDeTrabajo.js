@@ -1,13 +1,29 @@
 import * as ordenDeTrabajoModel from '../models/models.ordenDeTrabajo.js';
-import { estructurarOrden } from '../helpers/ordenDeTrabajo.js';
+import { estructurarGetOr, estructurarOrden } from '../helpers/ordenDeTrabajo.js';
+
 
 
 export const getAllOrdenes = async (req, res) => {
     try {
-        const ordenes = await ordenDeTrabajoModel.getAllOrdenes(); // Asumiendo que tienes esta función en el modelo
-        res.json(ordenes);
+        const ordenes = await ordenDeTrabajoModel.getAllOrdenes(); 
+        
+        // 1. Validamos si hay datos
+        if (!ordenes || ordenes.length === 0) {
+            return res.status(404).json({ message: "No se encontraron órdenes" });
+        }
+
+        // 2. Limpiamos los datos con el helper (si es necesario)
+        // Nota: Asegúrate de que estructurarGetOr maneje arrays
+        const ordenesLimpias = estructurarGetOr(ordenes); 
+        
+        // 3. ENVIAMOS LA RESPUESTA UNA SOLA VEZ
+        return res.json(ordenesLimpias);
+
     } catch (error) {
-        res.status(500).json({ message: "Error al obtener la lista de órdenes", error: error.message });
+        return res.status(500).json({ 
+            message: "Error al obtener la lista de órdenes", 
+            error: error.message 
+        });
     }
 };
 
@@ -15,7 +31,6 @@ export const getOrdenCompleta = async (req, res) => {
     try {
         const { id } = req.params;
         
-        // El modelo trae las filas con JOIN (pueden venir repetidas por los dispositivos)
         const rows = await ordenDeTrabajoModel.getDatosParaPDF(id); 
 
         if (!rows || rows.length === 0) {
