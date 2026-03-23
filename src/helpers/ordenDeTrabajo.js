@@ -9,7 +9,7 @@ export const estructurarOrden = (rows) => {
         tecnico: rows[0].nombreUsuario,
         laboratorio: rows[0].nombreLaboratorio,
         estado: rows[0].estado,
-        // Aquí "mapeamos" solo los dispositivos
+        // Aquí "mapeamos" solo los dispositivo
         dispositivos: rows.map(row => ({
          id: row.idDispositivo,      
          nombre: row.nombreDispositivo,
