@@ -30,10 +30,10 @@ export const getOrdenById = async (req, res) => {
 // POST /api/ordenes
 export const createOrden = async (req, res) => {
   try {
-    const { idUsuario, idLaboratorio, estado, insumos, horasHombre } = req.body
+    const { idUsuario, idLaboratorio, estado, insumos,fechaCreacion, horasHombre } = req.body
 
     // Validaciones mínimas
-    if (!idUsuario || !idLaboratorio ) {
+    if (!idUsuario || !idLaboratorio || !fechaCreacion) {
       return res.status(400).json({
         message: 'idUsuario e idLaboratorio son obligatorios'
       })
@@ -44,6 +44,7 @@ export const createOrden = async (req, res) => {
       idLaboratorio,
       estado,
       insumos,
+      fechaCreacion,
       horasHombre
     })
 

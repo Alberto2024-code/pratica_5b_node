@@ -28,16 +28,17 @@ export const getOrdenById = async (id) => {
 }
 
 // Crear nueva orden
-export const createOrden = async ({ idUsuario,idLaboratorio,estado,insumos,horasHombre}) => {
+export const createOrden = async ({ idUsuario,idLaboratorio,estado,insumos,fechaCreacion,horasHombre}) => {
   const [result] = await db.query(
     `INSERT INTO ordenes 
-     (idUsuario, idLaboratorio, estado, insumos, horasHombre)
-     VALUES (?, ?, ?, ?, ?)`,
+     (idUsuario, idLaboratorio, estado, insumos,fechaCreacion,horasHombre)
+     VALUES (?, ?, ?, ?, ?, ?)`,
     [
       idUsuario,
       idLaboratorio,
       estado || 'espera',
       insumos || null,
+      fechaCreacion,
       horasHombre || null
     ]
   )
@@ -48,6 +49,7 @@ export const createOrden = async ({ idUsuario,idLaboratorio,estado,insumos,horas
     idLaboratorio,
     estado: estado || 'espera',
     insumos,
+    fechaCreacion,
     horasHombre
   }
 }
