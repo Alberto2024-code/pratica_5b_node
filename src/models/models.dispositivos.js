@@ -60,6 +60,17 @@ export const deleteDispositivosModel = async(id)=>{
     );
     return result;
 }
+// Obtener dispositivos filtrados por laboratorio
+export const getDispositivosByLaboratorio = async (idLaboratorio) => {
+    const [rows] = await db.query(
+        `SELECT d.*, l.nombreLaboratorio 
+         FROM dispositivos d 
+         INNER JOIN laboratorios l ON d.idLaboratorio = l.idLaboratorio 
+         WHERE d.idLaboratorio = ?`, 
+        [idLaboratorio]
+    );
+    return rows;
+};
 
 
 

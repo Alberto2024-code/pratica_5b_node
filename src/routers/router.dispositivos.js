@@ -11,4 +11,6 @@ router.get('/:id', ctrl.getDispositivosById);
 router.post('/',verificarToken, ctrl.createDispositivo);
 router.put('/:id',verificarToken,ctrl.updateDispositivosModel);
 router.delete('/:id', verificarToken,ctrl.deleteDispositivosModel);
+// Ruta específica para el filtro
+router.get('/laboratorio/:id',verificarToken, ctrl.getByLaboratorio);
 export default router

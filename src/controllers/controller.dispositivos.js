@@ -72,3 +72,17 @@ export const deleteDispositivosModel = async(req,res)=>
             res.status(500).json({error:'Error al eliminar'})
         }
     }
+  export const getByLaboratorio = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const dispositivos = await dispositivosModel.getDispositivosByLaboratorio(id);
+        
+        if (dispositivos.length === 0) {
+            return res.status(404).json({ message: "No hay dispositivos en este laboratorio" });
+        }
+        
+        res.json(dispositivos);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};  
