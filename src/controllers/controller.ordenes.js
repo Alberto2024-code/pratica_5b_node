@@ -69,6 +69,25 @@ export const updateOrden = async (req, res) => {
         res.status(500).json({ error: 'Error al actualizar la orden: ' + error.message });
     }
 };
+export const updateInsumos = async(req,res)=>
+  {
+    try
+    {
+      const {id}= req.params;
+      const datos = req.body;
+
+      const result = await ordenModel.updateInsumos(id,datos);
+
+      if(result.affectedRows ==0)
+        {
+          return res.status(404).json({message:'orden no encontrada'})
+        }
+        res.json({message:'orden actualizada correctamente'})
+    }catch(error)
+    {
+      res.status(500).json({error:'error al actualizar la orden'+ error.message});
+    }
+  }
 
 export const deleteOrden = async (req, res) => {
     try {

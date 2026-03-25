@@ -6,13 +6,14 @@ import * as ctrl from '../controllers/controller.usuarios.js'
 const router = Router()
 
 // --- RUTAS PÚBLICAS ---
-router.get('/',ctrl.getAllUsuarios)
-router.get('/:id',  ctrl.getUsuariosById)
-
+router.get('/',ctrl.getAllUsuarios);
+router.get('/:id',  ctrl.getUsuariosById);
+router.get('/vistaUsuario', ctrl.vistasUsuariosModel);
 
 // Rutas Protegidas 
 router.post('/', verificarToken, ctrl.createUsuario);
 router.put('/:id', verificarToken, ctrl.updateUsuarioModel);
 router.delete('/:id', verificarToken, ctrl.deleteUsuarioModel);
+
 
 export default router

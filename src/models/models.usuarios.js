@@ -78,4 +78,17 @@ export const deleteUsuarioModel = async (id) => {
     );
     return result;
 };
-//agregar el json yol token  a la api y agregar los inner join 
+
+
+//se implento una vista para usuarios
+export const vistasUsuariosModel= async()=>
+    {
+        const[rows]= await db.query(`SELECT * FROM v_estadisticas_tecnicos`);
+        return rows;
+    }
+export const vistaUsuarioTecnico = async()=>
+    {
+        const[rows] = await bd.query('');
+        return rows;
+    }
+

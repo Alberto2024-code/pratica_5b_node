@@ -81,3 +81,13 @@ export const deleteUsuarioModel = async (req, res) => {
         res.status(500).json({ error: 'Error al eliminar' });
     }
 };
+
+
+export const vistasUsuariosModel = async (req, res) => {
+    try {
+        const datos = await usuarioModel.vistasUsuariosModel();
+        res.json(datos);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};

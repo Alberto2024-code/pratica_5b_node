@@ -38,7 +38,7 @@ export const createOrden = async ({ idUsuario,idLaboratorio,estado,insumos,fecha
       idLaboratorio,
       estado || 'espera',
       insumos || null,
-      fechaCreacion,
+      fechaCreacion || new Date(),
       horasHombre || null
     ]
   )
@@ -68,6 +68,12 @@ export const updateOrdenModel = async (id, datos) => {
     );
     return result;
 };
+export const updateInsumos = async(id,datos)=>
+  {
+    const{insumos}=datos;
+    const[result]= await db.query('UPDATE ordenes SET insumos=? WHERE idOrden = ?'[insumos,id]);
+    return  result;
+  }
 
 // Eliminar Orden
 export const deleteOrdenModel = async (id) => {

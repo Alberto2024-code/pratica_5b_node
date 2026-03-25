@@ -11,5 +11,6 @@ router.get('/:id', ctrl.getOrdenById)
 router.post('/',verificarToken, ctrl.createOrden)
 router.put('/:id', verificarToken, ctrl.updateOrden);
 router.delete('/:id', verificarToken, ctrl.deleteOrden);
+router.put('/:id',verificarToken,ctrl.updateInsumos);
 
 export default router
