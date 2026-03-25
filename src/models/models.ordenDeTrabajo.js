@@ -47,6 +47,7 @@ export const postDispositivoAOrden = async(idOrden, { idDispositivo, idTipoMante
     idTipoMantenimiento
   };
 }
+
 // get  /api/laboratorios/:id/dispositivos
 export const getDispositivosByLaboratorio = async(id)=>
     {

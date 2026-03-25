@@ -30,10 +30,10 @@ export const createOrdenDispositivo = async({idOrden,idDispositivo,idTipoManteni
         'INSERT INTO orden_dispositivos (idOrden,idDispositivo,idTipoMantenimiento,realizado) values (?,?,?,?)'
         ,[idOrden,idDispositivo,idTipoMantenimiento,realizado])
     return {
-        idOrden:restult.insertId,
+        idOrden,
         idDispositivo,
         idTipoMantenimiento,
-        realizado
+        realizado:realizado
     }
 }
 // Actualizar relación Orden-Dispositivo

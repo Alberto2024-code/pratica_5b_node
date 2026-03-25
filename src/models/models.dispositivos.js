@@ -71,7 +71,9 @@ export const getDispositivosByLaboratorio = async (idLaboratorio) => {
     );
     return rows;
 };
-
-
-
+export const  process_Dispositivos = async()=>
+    {
+        const [rows]= await db.query('CALL  sp_ListarDispositivosCompletos()')
+        return rows
+    }
 

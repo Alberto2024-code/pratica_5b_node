@@ -103,3 +103,25 @@ export const deleteOrden = async (req, res) => {
         res.status(500).json({ error: 'Error al eliminar la orden: ' + error.message });
     }
 };
+
+export const postOrdenCompleta = async (req, res) => {
+    try {
+        const { idUsuario, idLaboratorio, idDispositivo, idTipoMantenimiento } = req.body;
+        const resultado = await ordenModel.crearOrdenMantenimientoCompleta({
+            idUsuario, 
+            idLaboratorio, 
+            idDispositivo, 
+            idTipoMantenimiento
+        });
+
+        res.status(201).json({
+            message: "Orden y detalle creados correctamente mediante transacción",
+            data: resultado
+        });
+    } catch (error) {
+        res.status(500).json({ 
+            message: "Fallo en la transacción de base de datos",
+            error: error.message 
+        });
+    }
+};

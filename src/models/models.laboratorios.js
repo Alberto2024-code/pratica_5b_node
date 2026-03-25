@@ -1,7 +1,8 @@
 import db from '../config/BD.js'
 /*-----APARTADO DE LOS DATOS DE LABORATORIO-------------*/ 
 export const getAllLaboratorios = async () => {
-  const [rows] = await db.query('SELECT * FROM laboratorios')
+  const [rows] = await db.query('SELECT idLaboratorio,nombreLaboratorio, fn_TotalDispositivosLaboratorio(idLaboratorio) AS totalEquipos FROM laboratorios')
+ 
   return rows
 }
 

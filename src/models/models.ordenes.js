@@ -68,6 +68,36 @@ export const updateOrdenModel = async (id, datos) => {
     );
     return result;
 };
+//esta esta en processo ahun nose aprueba su uso
+export const crearOrdenMantenimientoCompleta = async (datos) => {
+    const { idUsuario, idLaboratorio, idDispositivo, idTipoMantenimiento } = datos;
+  
+    const connection = await db.getConnection(); 
+    
+    try {
+        await connection.beginTransaction();
+        const [resOrden] = await connection.query(
+            'INSERT INTO ordenes(fechaCreacion, idUsuario, idLaboratorio, estado) VALUES (NOW(), ?, ?, "EN PROCESO")',
+            [idUsuario, idLaboratorio]
+        );
+        
+        const nuevoIdOrden = resOrden.insertId; 
+        await connection.query(
+            'INSERT INTO orden_dispositivos(idOrden, idDispositivo, idTipoMantenimiento, realizado) VALUES (?, ?, ?, "No")',
+            [nuevoIdOrden, idDispositivo, idTipoMantenimiento]
+        );
+
+        await connection.commit(); 
+        return { success: true, idOrden: nuevoIdOrden };
+
+    } catch (error) {
+        await connection.rollback(); 
+        throw error;
+    } finally {
+        connection.release(); 
+    }
+};
+
 export const updateInsumos = async(id,datos)=>
   {
     const{insumos}=datos;

@@ -91,3 +91,16 @@ export const vistasUsuariosModel = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 };
+export const process_Tecnico = async(req,res)=>
+    {
+        try
+        {
+            const datos= await usuarioModel.process_Tecnico();
+
+            res.json(datos);
+        }
+        catch(error)
+        {
+            res.status(500).json({error:error.message});
+        }
+    }

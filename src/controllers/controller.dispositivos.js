@@ -86,3 +86,15 @@ export const deleteDispositivosModel = async(req,res)=>
         res.status(500).json({ error: error.message });
     }
 };  
+export const process_Dispositivos= async(req,res)=>
+    {
+        try
+        {
+            const datos = await dispositivosModel.process_Dispositivos();
+            res.json(datos);
+        }
+        catch(error)
+        {
+            res.status(500).json({error:error.message});
+        }
+    }

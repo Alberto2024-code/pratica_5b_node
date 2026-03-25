@@ -9,6 +9,7 @@ const router = Router()
 router.get('/',ctrl.getAllUsuarios);
 router.get('/:id',  ctrl.getUsuariosById);
 router.get('/vistaUsuario', ctrl.vistasUsuariosModel);
+router.post('/tecnico', ctrl.process_Tecnico);
 
 // Rutas Protegidas 
 router.post('/', verificarToken, ctrl.createUsuario);
