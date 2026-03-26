@@ -9,6 +9,14 @@ export const getAllLaboratorios = async (req, res) => {
     res.status(500).json({ error: error.message })
   }
 }
+export const funcion_getAllLaboratorios = async (req, res) => {
+  try {
+    const labs = await laboratorioModel.funcion_getAllLaboratorios()
+    res.status(200).json(labs)
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
+}
 
 // GET /api/laboratorios/:id
 export const getLaboratorioById = async (req, res) => {

@@ -11,5 +11,6 @@ router.get('/:id', ctrl.getLaboratorioById)
 router.post('/', verificarToken ,ctrl.createLaboratorio)
 router.put('/:id', verificarToken, ctrl.updateLaboratorio);
 router.delete('/:id', verificarToken, ctrl.deleteLaboratorio);
+router.post('/funcionLaboratorios',ctrl.funcion_getAllLaboratorios);
 
 export default router

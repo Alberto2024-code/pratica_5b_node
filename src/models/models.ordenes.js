@@ -101,7 +101,7 @@ export const crearOrdenMantenimientoCompleta = async (datos) => {
 export const updateInsumos = async(id,datos)=>
   {
     const{insumos}=datos;
-    const[result]= await db.query('UPDATE ordenes SET insumos=? WHERE idOrden = ?'[insumos,id]);
+    const[result]= await db.query('UPDATE ordenes SET insumos=? WHERE idOrden = ?',[insumos,id]);
     return  result;
   }
 
