@@ -85,7 +85,7 @@ export const vistasUsuariosModel= async()=>
     {
         const[rows]= await db.query(`SELECT * FROM v_estadisticas_tecnicos`);
         return rows;
-    }
+    } 
 export const process_Tecnico = async()=>
     {
         const[rows] = await bd.query('CALL sp_RegistrarTecnico(?,?,?,?,?,?)',[nombre, ap, am, mat, pass, tel]);

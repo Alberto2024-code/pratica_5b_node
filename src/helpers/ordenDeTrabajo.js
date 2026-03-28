@@ -9,13 +9,14 @@ export const estructurarOrden = (rows) => {
         usuario: rows[0].nombreUsuario,
         laboratorio: rows[0].nombreLaboratorio,
         estado: rows[0].estado,
-        // Aquí "mapeamos" solo los dispositivo
+        insumos: rows[0].insumos,
+        horasHombre: rows[0].horasHombre,
         dispositivos: rows.map(row => ({
          id: row.idDispositivo,      
          nombre: row.nombreDispositivo,
          mantenimiento: row.mantenimiento 
 }))
-    };
+};
 
     return orden;
 };
@@ -27,9 +28,11 @@ export const estructurarGetOr = (rows) => { // Eliminado el async
         fecha: rows[0].fechaCreacion,
         tecnico: rows[0].nombreUsuario,
         estado: rows[0].estado,
+        insumos: rows[0].insumos,
+        horasHombre: rows[0].horasHombre,
         laboratorio: rows[0].nombreLaboratorio,
         dispositivos: rows.map(row => ({
-            id: row.idDispositivo, // CORREGIDO: faltaba el row.
+            id: row.idDispositivo,
             nombre: row.nombreDispositivo,
             mantenimiento: row.mantenimiento,
             laboratorio: row.laboratorio,

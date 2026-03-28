@@ -75,6 +75,7 @@ export const getDatosParaPDF = async (id) => {
             d.idDispositivo,
             d.nombreDispositivo AS nombreDispositivo,
             tm.tipoMantenimiento AS mantenimiento
+            
         FROM ordenes o
         INNER JOIN usuarios u ON o.idUsuario = u.idUsuario
         INNER JOIN laboratorios l ON o.idLaboratorio = l.idLaboratorio
