@@ -111,3 +111,63 @@ export const getDispositivosByLaboratorio = async (req, res) => {
         res.status(500).json({ message: "Error al obtener dispositivos", error: error.message });
     }
 };
+
+export const updateInsumos = async(req,res)=>
+  {
+    try
+    {
+      const {id}= req.params;
+      const datos = req.body;
+
+      const result = await ordenDeTrabajoModel.updateInsumos(id,datos);
+
+      if(result.affectedRows ==0)
+        {
+          return res.status(404).json({message:'orden no encontrada'})
+        }
+        res.json({message:'orden actualizada correctamente'})
+    }catch(error)
+    {
+      res.status(500).json({error:'error al actualizar la insumo'+ error.message});
+    }
+  }
+  export const updateEstado = async(req,res)=>
+    {
+        try
+        {
+            const{id}=req.params;
+            const datos = req.body;
+
+            const result = await ordenDeTrabajoModel.updateEstado(id,datos);
+           
+            if(result.affectedRows == 0)
+            {
+                return res.status(404).json({message:'orden no encontrada'});
+            }
+            res.json({message:'orden actualizada correctamente'})
+        }
+        catch(error)
+        {
+            res.status(500).json({error:'error al actualizar la  el estado'+error.message});
+        }
+    }
+     export const updateHorasHombre = async(req,res)=>
+    {
+        try
+        {
+            const{id}=req.params;
+            const datos = req.body;
+
+            const result = await ordenDeTrabajoModel.updateHorasHombre(id,datos);
+           
+            if(result.affectedRows == 0)
+            {
+                return res.status(404).json({message:'orden no encontrada'});
+            }
+            res.json({message:'orden actualizada correctamente'})
+        }
+        catch(error)
+        {
+            res.status(500).json({error:'error al actualizar las horas hombre '+error.message});
+        }
+    }

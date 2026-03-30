@@ -13,4 +13,7 @@ router.put('/:id', verificarToken, ctrl.updateOrden);
 router.delete('/:id', verificarToken, ctrl.deleteOrden);
 router.put('/:id',verificarToken,ctrl.updateInsumos);
 router.post('/ordenesCompletas',verificarToken,ctrl.postOrdenCompleta)
+router.patch('/:id/estado',verificarToken,ctrl.updateEstado);
+router.patch('/:id/horasHombre',verificarToken,ctrl.updateHorasHombre);
+
 export default router

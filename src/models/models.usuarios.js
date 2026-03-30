@@ -19,7 +19,7 @@ export const getAllUsuarios= async ()=>{
     return rows
 }
 
-//fruncion que permite al usuario del fronend poder buscar un dispositivo por medio de id
+
 export const getUsuariosById = async (id) => { const [rows] = await db.query(
     'SELECT * FROM usuarios WHERE idUsuario = ?',
     [id]

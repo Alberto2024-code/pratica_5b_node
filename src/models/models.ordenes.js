@@ -104,7 +104,24 @@ export const updateInsumos = async(id,datos)=>
     const[result]= await db.query('UPDATE ordenes SET insumos=? WHERE idOrden = ?',[insumos,id]);
     return  result;
   }
+export const updateEstado = async (id, datos) => {
+    const { estado } = datos;
+    const [result] = await db.query(
+        'UPDATE ordenes SET estado = ? WHERE idOrden = ?',
+        [estado, id]
+    );
+    return result;
+};
 
+
+export const updateHorasHombre = async (id, datos) => {
+    const { insumos, horasHombre } = datos; 
+    const [result] = await db.query(
+        'UPDATE ordenes SET insumos = ?, horasHombre = ? WHERE idOrden = ?',
+        [insumos, horasHombre, id] 
+    );
+    return result;
+};
 // Eliminar Orden
 export const deleteOrdenModel = async (id) => {
     const [result] = await db.query(
