@@ -11,9 +11,9 @@ router.get('/:id', ctrl.getOrdenById)
 router.post('/',verificarToken, ctrl.createOrden)
 router.put('/:id', verificarToken, ctrl.updateOrden);
 router.delete('/:id', verificarToken, ctrl.deleteOrden);
-router.post('/:id',verificarToken,ctrl.updateInsumos);
+router.put('/:id',verificarToken,ctrl.updateInsumos);
 router.post('/ordenesCompletas',verificarToken,ctrl.postOrdenCompleta)
-router.post('/:id/estado',verificarToken,ctrl.updateEstado);
-router.post('/:id/horasHombre',verificarToken,ctrl.updateHorasHombre);
+router.patch('/:id/estado',verificarToken,ctrl.updateEstado);
+router.patch('/:id/horasHombre',verificarToken,ctrl.updateHorasHombre);
 
 export default router

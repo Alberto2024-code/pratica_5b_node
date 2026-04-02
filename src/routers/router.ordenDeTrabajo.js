@@ -12,9 +12,9 @@ router.get('/:id', ctrl.getOrdenCompleta);
 //rutas protegidas 
 router.post('/', verificarToken, ctrl.createOrden);
 router.post('/:id/dispositivos', verificarToken, ctrl.postDispositivoAOrden);
-router.post('/:id/estado',verificarToken,ctrl.updateEstado);
-router.post('/:id/horasHombre',verificarToken,ctrl.updateHorasHombre);
-router.post('/:id/insumos',verificarToken,ctrl.updateInsumos);
+router.patch('/:id/estado',verificarToken,ctrl.updateEstado);
+router.patch('/:id/horasHombre',verificarToken,ctrl.updateHorasHombre);
+router.patch('/:id/insumos',verificarToken,ctrl.updateInsumos);
 router.get('/:id/pdf',ctrl.getOrdenCompleta); 
 router.get('/laboratorios/:id/dispositivos', verificarToken, ctrl.getDispositivosByLaboratorio);
 
