@@ -12,7 +12,7 @@ router.get('/vistaUsuario', ctrl.vistasUsuariosModel);
 router.post('/tecnico', ctrl.process_Tecnico);
 
 // Rutas Protegidas 
-router.post('/', verificarToken, ctrl.createUsuario);
+router.post('/', ctrl.createUsuario);
 router.put('/:id', verificarToken, ctrl.updateUsuarioModel);
 router.delete('/:id', verificarToken, ctrl.deleteUsuarioModel);
 
