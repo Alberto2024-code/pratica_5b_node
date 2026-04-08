@@ -5,8 +5,8 @@ import db from '../config/BD.js';
 export const GetEcuaciones = async (id_dispositivo) => {
     try {
         const [rows] = await db.query(
-            `SELECT rendimiento, fecha_registro FROM novedades WHERE id_dispositivo = ? ORDER BY fecha_registro DESC LIMIT 2`, 
-            [id_dispositivo]
+            `SELECT informacion, fecha FROM novedades WHERE id_dispositivo = ? ORDER BY fecha DESC LIMIT 2`, 
+    [id_dispositivo]
         );
 
         if (rows.length < 2) {
