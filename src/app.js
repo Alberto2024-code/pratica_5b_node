@@ -35,7 +35,7 @@ app.use('/api/tipo_dispositivo', tipo_dispositivoRouter)
 app.use('/api/tipomantenimientos', tipo_matenimientoRouter)
 app.use('/api/usuarios', usuariosRouter)
 app.use('/api/ordenTrabajo',ordenDeTrabajo)
-app.use('api/ecuaciones',ecuaciones)
+app.use('/api/ecuaciones',ecuaciones)
 app.get('/', (req, res) => {
   res.send('API de mantenimiento funcionando correctamente ')
 })
