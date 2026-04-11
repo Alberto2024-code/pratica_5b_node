@@ -18,7 +18,7 @@ export const GetEcuaciones = async (req, res) => {
     }
 };
 
-export const getPrioridadLaboratorios = async (req, res) => {
+export const GetReporteLaboratorios = async (req, res) => {
     try {
         const reporte = await modelEcuaciones.GetReporteLaboratorios();
         return res.status(200).json({
