@@ -74,3 +74,32 @@ export const GetReporteLaboratorios = async () => {
         throw error;
     }
 };
+// 3. Reporte de Estado General por Laboratorio  esto es lo que me pidio mi fronend
+export const GetEstadoLaboratorios = async () => {
+    try {
+        const [rows] = await db.query(
+            `SELECT 
+                l.nombreLaboratorio, 
+                ROUND(AVG(h.rendimiento), 2) AS promedio_rendimiento,
+                COUNT(d.idDispositivo) AS total_equipos,
+                SUM(CASE WHEN h.rendimiento < 70 THEN 1 ELSE 0 END) AS equipos_criticos
+             FROM laboratorios l
+             INNER JOIN dispositivos d ON l.idLaboratorio = d.idLaboratorio
+             INNER JOIN (
+                -- Solo tomamos el rendimiento más reciente de cada equipo
+                SELECT idDispositivo, rendimiento 
+                FROM historial_rendimiento 
+                WHERE (idDispositivo, fecha) IN (
+                    SELECT idDispositivo, MAX(fecha) 
+                    FROM historial_rendimiento 
+                    GROUP BY idDispositivo
+                )
+             ) h ON d.idDispositivo = h.idDispositivo
+             GROUP BY l.idLaboratorio, l.nombreLaboratorio
+             ORDER BY promedio_rendimiento ASC` 
+        );
+        return rows;
+    } catch (error) {
+        throw error;
+    }
+};

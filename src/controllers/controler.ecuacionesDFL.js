@@ -32,3 +32,19 @@ export const GetReporteLaboratorios = async (req, res) => {
         });
     }
 };
+export const GetEstadoLaboratorios = async (req, res) => {
+    try {
+        const estado = await modelEcuaciones.GetEstadoLaboratorios();
+        return res.status(200).json({
+            ok: true,
+            msg: "Estado de laboratorios para mantenimiento",
+            data: estado
+        });
+    } catch (error) {
+        return res.status(500).json({
+            ok: false,
+            msg: "Error al obtener estado de laboratorios.",
+            error: error.message
+        });
+    }
+};
