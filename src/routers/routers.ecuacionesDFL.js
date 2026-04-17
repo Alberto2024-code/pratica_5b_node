@@ -6,4 +6,5 @@ const router = Router();
 router.get('/prediccion/:id', ctrl.GetEcuaciones);
 router.get('/prioridad-laboratorios', ctrl.GetReporteLaboratorios);
 router.get('/estado-mantenimiento', ctrl.GetEstadoLaboratorios);
+router.get('/prediciones/:id', ctrl.GetEcuacionesDOS);
 export default router;
