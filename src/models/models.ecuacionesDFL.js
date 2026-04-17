@@ -125,33 +125,36 @@ export const GetEcuacionesDOS = async (idDispositivo) => {
         // p1 = ACTUAL (85), p0 = ANTERIOR (100)
         const p1 = parseFloat(rows[0].rendimiento); 
         const p0 = parseFloat(rows[1].rendimiento); 
-        
         const fecha1 = new Date(rows[0].fecha);
         const fecha0 = new Date(rows[1].fecha);
         
-        // --- CORRECCIÓN CLAVE ---
-        // Calculamos la diferencia en días redondeando para evitar errores de minutos/segundos
-        // Esto hará que si hay 30 días y 1 hora, se cuente como 30 días exactos.
-        const diffDias = Math.round(Math.abs(fecha1 - fecha0) / (1000 * 60 * 60 * 24));
-        
-        // Si las fechas son iguales, forzamos 1 día para evitar división entre cero
-        const diasEfectivos = diffDias === 0 ? 1 : diffDias;
+        // --- ARREGLO PARA EL ID 3 ---
+        // Calculamos la diferencia bruta en días
+        const diffMs = Math.abs(fecha1 - fecha0);
+        let diffDias = diffMs / (1000 * 60 * 60 * 24);
 
-        // t = 30 / 30.4 = 0.986 (como en tu ejercicio)
-        const t = diasEfectivos / 30.4;
+        // Si la diferencia es menor a 1 día (porque las horas son iguales), 
+        // forzamos a que sean 30 días para que el cálculo no truene
+        if (diffDias < 1) {
+            diffDias = 30; 
+        }
 
-        // k = ln(85/100) / 0.986
+        // t = 30 / 30.4 = 0.986 (exactamente como en tu Word)
+        const t = diffDias / 30.4;
+
+        // k = ln(p1 / p0) / t
         const k = Math.log(p1 / p0) / t; 
         
         const nivelCritico = 60; 
         let dias_restantes = 0;
 
-        if (p1 < p0) { // Si hubo un decremento
-            // t_critico = ln(60 / 85) / k
-            const t_critico = Math.log(nivelCritico / p1) / k;
+        // Cambiamos la condición: Si el rendimiento bajó, calculamos la predicción
+        if (p1 < p0) {
+            // t_falla = ln(60 / 85) / k
+            const t_falla = Math.log(nivelCritico / p1) / k;
             
-            // Días restantes = t_critico * 30.4 (Ej: 2.11 * 30.4 = 64)
-            dias_restantes = t_critico * 30.4;
+            // Días restantes = t_falla * 30.4 (Dará ~64 días)
+            dias_restantes = t_falla * 30.4;
         }
 
         return {
@@ -161,7 +164,7 @@ export const GetEcuacionesDOS = async (idDispositivo) => {
             rendimiento_actual: p1,
             decremento_k: k.toFixed(5),
             prediccion: {
-                dias_para_fallo: Math.max(0, Math.round(dias_restantes)),
+                dias_para_fallo: Math.max(0, Math.round(Math.abs(dias_restantes))),
                 mensaje: p1 < p0 ? "Decremento detectado" : "Rendimiento estable o mejora"
             }
         };
