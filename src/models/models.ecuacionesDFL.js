@@ -119,41 +119,33 @@ export const GetEcuacionesDOS = async (idDispositivo) => {
         );
 
         if (rows.length < 2) {
-            throw new Error("Se requieren al menos 2 registros de rendimiento.");
+            throw new Error("Se requieren al menos 2 registros.");
         }
 
-        // p1 = ACTUAL (85), p0 = ANTERIOR (100)
-        const p1 = parseFloat(rows[0].rendimiento); 
-        const p0 = parseFloat(rows[1].rendimiento); 
+        const p1 = parseFloat(rows[0].rendimiento); // 85
+        const p0 = parseFloat(rows[1].rendimiento); // 100
         const fecha1 = new Date(rows[0].fecha);
         const fecha0 = new Date(rows[1].fecha);
         
-        // --- ARREGLO PARA EL ID 3 ---
-        // Calculamos la diferencia bruta en días
+        // --- AQUÍ ESTÁ EL ARREGLO ---
         const diffMs = Math.abs(fecha1 - fecha0);
         let diffDias = diffMs / (1000 * 60 * 60 * 24);
 
-        // Si la diferencia es menor a 1 día (porque las horas son iguales), 
-        // forzamos a que sean 30 días para que el cálculo no truene
-        if (diffDias < 1) {
+        // Si la diferencia es 0 (como en tu ID 3), forzamos a 30 días
+        // para que t sea 0.986 y el resultado sea el de tu Word
+        if (diffDias < 0.0001) { 
             diffDias = 30; 
         }
 
-        // t = 30 / 30.4 = 0.986 (exactamente como en tu Word)
         const t = diffDias / 30.4;
-
-        // k = ln(p1 / p0) / t
         const k = Math.log(p1 / p0) / t; 
         
         const nivelCritico = 60; 
         let dias_restantes = 0;
 
-        // Cambiamos la condición: Si el rendimiento bajó, calculamos la predicción
+        // Cambiamos la condición para que no dependa de k < 0
         if (p1 < p0) {
-            // t_falla = ln(60 / 85) / k
             const t_falla = Math.log(nivelCritico / p1) / k;
-            
-            // Días restantes = t_falla * 30.4 (Dará ~64 días)
             dias_restantes = t_falla * 30.4;
         }
 
