@@ -162,7 +162,7 @@ export const GetEcuacionesDOS = async (idDispositivo) => {
             decremento_k: k.toFixed(5),
             prediccion: {
                 dias_para_fallo: Math.max(0, Math.round(Math.abs(dias_restantes))),
-                Meses_para_fallo: Math.max(0, Math.round(Math.abs(dias_restantes))),
+                Meses_para_fallo: Math.max(0, Math.round(Math.abs(Meses_Restantes))),
                 mensaje: p1 < p0 ? "Decremento detectado" : "Rendimiento estable o mejora"
             }
         };
