@@ -142,12 +142,17 @@ export const GetEcuacionesDOS = async (idDispositivo) => {
         
         const nivelCritico = 60; 
         let dias_restantes = 0;
+        let Meses_Restantes =0;
+
+        const tiempoMeses = k * 5;
 
         // Cambiamos la condición para que no dependa de k < 0
         if (p1 < p0) {
             const t_falla = Math.log(nivelCritico / p1) / k;
             dias_restantes = t_falla * 30.4;
         }
+        const mese_falla = p0 * tiempoMeses;
+        Meses_Restantes = mese_falla;
 
         return {
             equipo: rows[0].nombreDispositivo,
@@ -157,6 +162,7 @@ export const GetEcuacionesDOS = async (idDispositivo) => {
             decremento_k: k.toFixed(5),
             prediccion: {
                 dias_para_fallo: Math.max(0, Math.round(Math.abs(dias_restantes))),
+                Meses_para_fallo: Math.max(0, Math.round(Math.abs(dias_restantes))),
                 mensaje: p1 < p0 ? "Decremento detectado" : "Rendimiento estable o mejora"
             }
         };
