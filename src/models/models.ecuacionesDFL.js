@@ -51,7 +51,7 @@ export const GetEcuaciones = async (idDispositivo) => {
             decremento_k: k.toFixed(5),
             prediccion: {
                 dias_para_fallo: Math.max(0, Math.round(dias_restantes)),
-                 promedio: Math.max(0, Math.round(Math.abs(rendimiento_en_5_meses))),
+                 promedio: Math.max(0, Math.round(Math.abs(Meses_Restantes))),
                 mensaje: k < 0 ? "Decremento detectado" : "Rendimiento estable o mejora"
             }
         };
@@ -107,6 +107,7 @@ export const GetEstadoLaboratorios = async () => {
         throw error;
     }
 };
+/*
 export const GetEcuacionesDOS = async (idDispositivo) => {
     try {
         const [rows] = await db.query(
@@ -178,3 +179,4 @@ export const GetEcuacionesDOS = async (idDispositivo) => {
         throw error;
     }
 };
+*/
