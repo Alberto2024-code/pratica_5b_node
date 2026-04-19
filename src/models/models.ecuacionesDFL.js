@@ -36,15 +36,13 @@ export const GetEcuaciones = async (idDispositivo) => {
         let dias_restantes = 0;
         let Meses_Restantes = 0;
 
-        const tiempoMeses =Math.exp(k * 5);
+        const rendimiento_en_5_meses = p0 * Math.exp(k * 5);
+        Meses_Restantes = rendimiento_en_5_meses;
         if (k < 0) {
             // Calculamos cuánto falta desde el rendimiento ACTUAL (p1) hasta el crítico
             const t_critico = Math.log(nivelCritico / p1) / k;
             dias_restantes = t_critico * 30.4;
         }
-        const mese_falla = p0 * tiempoMeses;
-        Meses_Restantes = mese_falla;
-        
         return {
             equipo: rows[0].nombreDispositivo,
             modelo: rows[0].nombreModelo,
@@ -53,7 +51,7 @@ export const GetEcuaciones = async (idDispositivo) => {
             decremento_k: k.toFixed(5),
             prediccion: {
                 dias_para_fallo: Math.max(0, Math.round(dias_restantes)),
-                 promedio: Math.max(0, Math.round(Math.abs(Meses_Restantes))),
+                 promedio: Math.max(0, Math.round(Math.abs(rendimiento_en_5_meses))),
                 mensaje: k < 0 ? "Decremento detectado" : "Rendimiento estable o mejora"
             }
         };
