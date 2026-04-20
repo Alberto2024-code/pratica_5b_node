@@ -35,12 +35,13 @@ export const GetEcuaciones = async (idDispositivo) => {
         
         let dias_restantes = 0;
         let Meses_Restantes = 0;
-
+        
         const rendimiento_en_5_meses = p0 * Math.exp(k * 5);
+       
         Meses_Restantes = rendimiento_en_5_meses;
         if (k < 0) {
             // Calculamos cuánto falta desde el rendimiento ACTUAL (p1) hasta el crítico
-            const t_critico = Math.log(nivelCritico / p1) / k;
+            const t_critico = Math.log(nivelCritico / p0) / k;
             dias_restantes = t_critico * 30.4;
         }
         return {
