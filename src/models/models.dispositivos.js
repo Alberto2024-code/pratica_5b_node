@@ -77,3 +77,55 @@ export const  process_Dispositivos = async()=>
         return rows
     }
 
+    
+// este apartado es lo de ecuaciones diferenciales deseenme suerte  (°o°)
+// Obtener M1 (1 semana)
+export const getM1 = async (idDispositivo) => {
+    const [rows] = await db.query(`
+        SELECT COUNT(DISTINCT o.idOrden) AS M1
+        FROM dispositivos d
+        INNER JOIN (
+            SELECT od.idDispositivo, MIN(o.fechaCreacion) AS fechaInicio
+            FROM ordenes o
+            JOIN orden_dispositivos od ON o.idOrden = od.idOrden
+            WHERE od.idTipoMantenimiento = 2
+            GROUP BY od.idDispositivo
+        ) primera_fecha ON d.idDispositivo = primera_fecha.idDispositivo
+        INNER JOIN orden_dispositivos od ON d.idDispositivo = od.idDispositivo
+        INNER JOIN ordenes o ON od.idOrden = o.idOrden
+        WHERE d.idDispositivo = ?
+          AND od.idTipoMantenimiento = 2
+          AND o.fechaCreacion BETWEEN primera_fecha.fechaInicio
+          AND DATE_ADD(primera_fecha.fechaInicio, INTERVAL 1 WEEK);
+    `, [idDispositivo]);
+
+    return rows[0] || { M1: 0 };
+};
+
+// Obtener M2 (4 semanas)
+export const getM2 = async (idDispositivo) => {
+    const [rows] = await db.query(`
+        SELECT 
+            l.nombreLaboratorio,
+            d.nombreDispositivo,
+            COUNT(DISTINCT o.idOrden) AS M2
+        FROM dispositivos d
+        INNER JOIN laboratorios l ON d.idLaboratorio = l.idLaboratorio
+        INNER JOIN (
+            SELECT od.idDispositivo, MIN(o.fechaCreacion) AS fechaInicio
+            FROM ordenes o
+            JOIN orden_dispositivos od ON o.idOrden = od.idOrden
+            WHERE od.idTipoMantenimiento = 2
+            GROUP BY od.idDispositivo
+        ) primera_fecha ON d.idDispositivo = primera_fecha.idDispositivo
+        INNER JOIN orden_dispositivos od ON d.idDispositivo = od.idDispositivo
+        INNER JOIN ordenes o ON od.idOrden = o.idOrden
+        WHERE d.idDispositivo = ?
+          AND od.idTipoMantenimiento = 2
+          AND o.fechaCreacion BETWEEN primera_fecha.fechaInicio
+          AND DATE_ADD(primera_fecha.fechaInicio, INTERVAL 4 WEEK)
+        GROUP BY d.idDispositivo, d.nombreDispositivo, l.nombreLaboratorio;
+    `, [idDispositivo]);
+
+    return rows[0] || { M2: 0 };
+};

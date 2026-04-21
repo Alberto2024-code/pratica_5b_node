@@ -8,6 +8,7 @@ router.get('/', ctrl.getAllDispositivos);
 router.get('/:id', ctrl.getDispositivosById);
 router.get('/laboratorio/:id', ctrl.getByLaboratorio);
 router.get('/detalleCompleto',ctrl.process_Dispositivos);
+router.get('/analisis/:idDispositivo', ctrl.getAnalisisFinalUTH);
 //rutas proteguidas 
 router.post('/',verificarToken, ctrl.createDispositivo);
 router.put('/:id',verificarToken,ctrl.updateDispositivosModel);
