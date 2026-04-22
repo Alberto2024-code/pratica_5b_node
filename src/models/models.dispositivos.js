@@ -77,8 +77,9 @@ export const  process_Dispositivos = async()=>
         return rows
     }
 
-    
-// este apartado es lo de ecuaciones diferenciales deseenme suerte  (°o°)
+
+
+    // este apartado es lo de ecuaciones diferenciales deseenme suerte  (°o°)
 // Obtener M1 (1 semana)
 export const getM1 = async (idDispositivo) => {
     const [rows] = await db.query(`

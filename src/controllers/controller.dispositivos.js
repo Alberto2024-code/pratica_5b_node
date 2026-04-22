@@ -125,12 +125,15 @@ export const getAnalisisFinalUTH = async (req, res) => {
                 error: "datos invalidos: no se puede calcular con valores en 0" 
             });
         }
-
-        if (M2 <= M1) {
+        /*
+        if (M2 <= M1) 
+        {
             return res.status(400).json({ 
                 error: "no hay crecimiento suficiente para aplicar el modelo exponencial" 
-            });
+            });}
+            
         }
+        */
 
         //  Modelo: dM/dt = kM
         const t1 = 1;
